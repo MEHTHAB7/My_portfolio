@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Creative Developer</title>
+    <meta name="description" content="Personal portfolio showcasing my work, skills, and experience as a web developer.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="#home" class="logo">Port<span>folio.</span></a>
+        
+        <div class="menu-icon" id="menu-icon">
+            <i class='bx bx-menu'></i>
+        </div>
+
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="home" id="home">
+        <div class="home-content reveal">
+            <h3>Hello, It's Me</h3>
+            <h1>Mehthab N M</h1>
+            <h3>And I'm a <span class="multiple-text">Frontend Developer</span></h3>
+            <p>I craft high-performance, beautiful, and interactive web applications with a focus on premium user experiences and robust functionality.</p>
+            <div class="social-media">
+                <a href="https://www.linkedin.com/in/mehthab-n-m-637611344?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/MEHTHAB7" target="_blank" rel="noopener noreferrer"><i class='bx bxl-github'></i></a>
+                <a href="https://www.instagram.com/mehthab_._?igsh=ZGxvYTB6YjAzZmVw" target="_blank" rel="noopener noreferrer"><i class='bx bxl-instagram'></i></a>
+                <a href="#contact"><i class='bx bx-envelope'></i></a>
+            </div>
+            <a href="#contact" class="btn">Let's Talk</a>
+        </div>
+        <div class="home-img reveal fade-right">
+            <div class="img-placeholder hero-avatar">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="heading reveal">About <span>Me</span></h2>
+        <div class="about-container reveal fade-up">
+            <div class="about-text glass-card">
+                <h3>Crafting Digital Experiences</h3>
+                <p>I am a versatile creator with expertise spanning across Full Stack Web Development, intuitive UI/UX Design, and impactful Video Editing. I believe in blending technical robustness with stunning visual aesthetics.</p>
+                <p>Whether I'm architecting a robust backend, designing a pixel-perfect user interface, or cutting a dynamic video sequence, my goal is always to create an engaging experience that wows the user from the very first interaction.</p>
+                <a href="#" class="btn btn-secondary">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="heading reveal">My <span>Skills</span></h2>
+        <div class="skills-container inner-width">
+            <div class="skill-category reveal fade-left">
+                <h3>Development</h3>
+                <div class="skill-badges">
+                    <span class="badge glass">HTML/CSS/JS</span>
+                    <span class="badge glass">React & Node.js</span>
+                    <span class="badge glass">TypeScript</span>
+                    <span class="badge glass">MongoDB & SQL</span>
+                </div>
+            </div>
+            <div class="skill-category reveal fade-right">
+                <h3>Design & Media</h3>
+                <div class="skill-badges">
+                    <span class="badge glass">UI/UX Design</span>
+                    <span class="badge glass">Figma</span>
+                    <span class="badge glass">Adobe Premiere Pro</span>
+                    <span class="badge glass">After Effects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="heading reveal">Latest <span>Projects</span></h2>
+        <div class="portfolio-container reveal fade-up">
+            <div class="portfolio-box glass-card interactive-card">
+                <div class="portfolio-img">
+                    <div class="proj-placeholder gradient-1"></div>
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Credit Card Fraud ML</h4>
+                    <p>Machine learning application for credit card fraud detection using Jupyter Notebook.</p>
+                    <a href="https://github.com/MEHTHAB7/credit-card-fraud-application" target="_blank" rel="noopener noreferrer" aria-label="View Credit Card Fraud Application repository on GitHub"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box glass-card interactive-card">
+                <div class="portfolio-img">
+                    <div class="proj-placeholder gradient-2"></div>
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Task Management App</h4>
+                    <p>PHP and MySQL-based system featuring role-based access for admins and employees.</p>
+                    <a href="https://github.com/MEHTHAB7/Task_Management_App" target="_blank" rel="noopener noreferrer" aria-label="View Task Management App repository on GitHub"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box glass-card interactive-card">
+                <div class="portfolio-img">
+                    <div class="proj-placeholder gradient-3"></div>
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Wedding Company App</h4>
+                    <p>A modern React-based web application with Vite, featuring clean UI components.</p>
+                    <a href="https://github.com/MEHTHAB7/wedding_company" target="_blank" rel="noopener noreferrer" aria-label="View Wedding Company App repository on GitHub"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box glass-card interactive-card">
+                <div class="portfolio-img">
+                    <div class="proj-placeholder gradient-4"></div>
+                </div>
+                <div class="portfolio-layer">
+                    <h4>Tic Tac Toe</h4>
+                    <p>An interactive and responsive classic Tic-Tac-Toe game built using vanilla JS.</p>
+                    <a href="https://github.com/MEHTHAB7/Tic_Tac_Toe" target="_blank" rel="noopener noreferrer" aria-label="View Tic Tac Toe game repository on GitHub"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="heading reveal">Contact <span>Me!</span></h2>
+        <form action="#" class="glass-card reveal fade-up">
+            <div class="input-box">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number">
+                <input type="text" placeholder="Email Subject" required>
+            </div>
+            <textarea cols="30" rows="10" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>&copy; 2026 by John Doe | All Rights Reserved.</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <!-- Typed.js for typing animation -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
