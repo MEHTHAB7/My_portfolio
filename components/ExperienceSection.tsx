@@ -62,11 +62,11 @@ const timelineData: TimelineItem[] = [
     id: "ncc-corporal",
     role: "NCC Corporal (CPL Rank)",
     organization: "National Cadet Corps (NCC)",
-    period: "6 Years Military Service",
+    period: "6 Years NCC Cadet Service",
     type: "leadership",
-    awardBadge: "🎖️ Military Leadership Rank",
+    awardBadge: "🎖️ NCC Leadership Rank",
     bullets: [
-      "Completed 6 years of disciplined military cadet service, earning promotion to Corporal (CPL Rank).",
+      "Completed 6 years of disciplined NCC cadet service, earning promotion to Corporal (CPL Rank).",
       "Organized squad drills, emergency response training camps, and community outreach initiatives.",
       "Instilled rigorous discipline, high stress tolerance, clear command communication, and team cohesion.",
     ],
@@ -111,7 +111,7 @@ export default function ExperienceSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            Proven history of delivering software products, leading engineering squads, achieving academic distinction, and demonstrating military-grade discipline.
+            Proven history of delivering software products, leading engineering squads, achieving academic distinction, and demonstrating exceptional discipline and leadership.
           </motion.p>
         </div>
 

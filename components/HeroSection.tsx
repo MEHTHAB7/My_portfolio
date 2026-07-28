@@ -201,7 +201,7 @@ export default function HeroSection() {
                   {/* Top Floating Badge */}
                   <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-zinc-950/80 backdrop-blur-md border border-white/10 flex items-center gap-1.5 text-xs text-zinc-200 font-medium">
                     <Terminal className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Full-Stack Architect</span>
+                    <span>Full-Stack Developer</span>
                   </div>
 
                   {/* Bottom Floating Skill Pills */}
@@ -221,7 +221,7 @@ export default function HeroSection() {
                 <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
                   <div>
                     <h3 className="text-white font-bold text-base">Mehthab N M</h3>
-                    <p className="text-zinc-400 text-xs">MCA Candidate & Lead Developer</p>
+                    <p className="text-zinc-400 text-xs">MCA Candidate & Full Stack Developer</p>
                   </div>
                   <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
                     <Award className="w-5 h-5" />
