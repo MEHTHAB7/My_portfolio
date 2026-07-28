@@ -98,6 +98,20 @@ const educationData: EducationItem[] = [
     ],
     skills: ["Computer Applications", "C/C++", "Java", "Web Technologies", "DBMS", "Data Structures"],
   },
+  {
+    id: "google-developer-program",
+    degree: "Google Developer Program — Premium Tier",
+    institution: "Google Developers",
+    period: "Jul 2026",
+    statusPill: "🌐 Verified Membership",
+    category: "degree",
+    highlightBadge: "Google Developer Program",
+    description: [
+      "Completed hands-on technical labs: API Key Management and Security, AI-Assisted Data Science with BigQuery, Firebase Phone Number Verification for Android, and AI Speech Recognition with TensorFlow Lite for Microcontrollers.",
+      "Active member of the Google Developer Program, engaging with the latest tools across cloud, AI, and mobile development.",
+    ],
+    skills: ["Google Cloud", "BigQuery", "Firebase", "TensorFlow Lite", "API Security"],
+  },
 ];
 
 export default function EducationSection() {
@@ -154,7 +168,7 @@ export default function EducationSection() {
                 <Brain className="w-5 h-5" />
               </span>
               <h3 className="text-xl font-bold text-white tracking-wide">
-                Specialized Upskilling & Diplomas
+                Specialized Upskilling & Certifications
               </h3>
             </div>
 
@@ -227,7 +241,7 @@ export default function EducationSection() {
                 <GraduationCap className="w-5 h-5" />
               </span>
               <h3 className="text-xl font-bold text-white tracking-wide">
-                Academic Degrees
+                Academic Degrees & Programs
               </h3>
             </div>
 
