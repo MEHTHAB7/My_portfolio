@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
+const basePath =
+  process.env.NEXT_PUBLIC_BASE_PATH ??
+  (process.env.NODE_ENV === "production" ? "/My_portfolio" : "");
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  basePath: basePath,
+  trailingSlash: true,
 };
 
 export default nextConfig;
