@@ -31,10 +31,10 @@ const projectsData: ProjectItem[] = [
       "Zero-cost PaaS deploying web apps directly from GitHub repos or Docker containers with multi-tenancy routing & AI deployment copilot.",
     fullOverview:
       "Zynkarashift is a complete self-hosted Platform-as-a-Service engineered to bypass high cloud hosting fees. It features dynamic reverse proxy routing, multi-tenant container isolation, automated SSL via Let's Encrypt, and an AI-driven deployment copilot that inspects build logs to automatically diagnose deployment failures.",
-    tech: ["Node.js", "Docker", "GitHub API", "CI/CD", "Tailwind"],
+    tech: ["Node.js", "Docker", "CI/CD Pipelines", "GitHub Actions", "Tailwind"],
     keyHighlights: [
       "Zero-downtime container deployments via Docker API",
-      "Automated GitHub webhook build pipeline & log streaming",
+      "Automated CI/CD build pipeline & GitHub webhook log streaming",
       "Multi-tenant reverse proxy routing with custom domains",
       "AI Copilot diagnosing build failures in real time",
     ],

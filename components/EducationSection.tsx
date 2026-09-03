@@ -25,6 +25,7 @@ interface EducationItem {
   skills: string[];
   highlightBadge?: string;
   credentialId?: string;
+  awardBadge?: string;
 }
 
 const educationData: EducationItem[] = [
@@ -49,9 +50,11 @@ const educationData: EducationItem[] = [
     institution: "Camerin Institute of Upskill",
     period: "May 11, 2026 – Present",
     statusPill: "⚡ Currently Pursuing",
+    awardBadge: "🏆 Best Student of the Month – July",
     category: "certification",
     highlightBadge: "🤖 Django + React + AI",
     description: [
+      "Honored as Best Student of the Month (July) for academic excellence, active participation, and outstanding execution in Python full-stack engineering.",
       "Specializing in Python full-stack engineering with Django backend framework, REST API development, and modern React frontend architectures.",
       "Integrating AI and Machine Learning models into full-stack web applications for intelligent automated features.",
     ],
@@ -179,7 +182,11 @@ export default function EducationSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="group relative rounded-3xl glass-card p-6 sm:p-7 border border-white/10 glass-card-hover"
+                className={`group relative rounded-3xl glass-card p-6 sm:p-7 border ${
+                  item.awardBadge
+                    ? "border-amber-500/35 hover:border-amber-400/60 shadow-lg shadow-amber-500/5"
+                    : "border-white/10"
+                } glass-card-hover`}
               >
                 {/* Header Badge & Period */}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
@@ -192,6 +199,14 @@ export default function EducationSection() {
                     {item.statusPill}
                   </span>
                 </div>
+
+                {/* Award Highlight Badge if present */}
+                {item.awardBadge && (
+                  <div className="mb-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold shadow-sm">
+                    <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>{item.awardBadge}</span>
+                  </div>
+                )}
 
                 {/* Title & Institution */}
                 <h4 className="text-xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
@@ -252,7 +267,11 @@ export default function EducationSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="group relative rounded-3xl glass-card p-6 sm:p-7 border border-white/10 glass-card-hover"
+                className={`group relative rounded-3xl glass-card p-6 sm:p-7 border ${
+                  item.awardBadge
+                    ? "border-amber-500/35 hover:border-amber-400/60 shadow-lg shadow-amber-500/5"
+                    : "border-white/10"
+                } glass-card-hover`}
               >
                 {/* Header Badge & Period */}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
@@ -265,6 +284,14 @@ export default function EducationSection() {
                     {item.statusPill}
                   </span>
                 </div>
+
+                {/* Award Highlight Badge if present */}
+                {item.awardBadge && (
+                  <div className="mb-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold shadow-sm">
+                    <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>{item.awardBadge}</span>
+                  </div>
+                )}
 
                 {/* Title & Institution */}
                 <h4 className="text-xl font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors">

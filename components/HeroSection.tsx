@@ -102,7 +102,7 @@ export default function HeroSection() {
               className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal"
             >
               BCA graduate & MCA candidate experienced in building production web applications,
-              automated deployment platforms, and AI-driven workflows. Proven track record leading
+              automated CI/CD pipelines (GitHub Actions, Jenkins), and AI-driven workflows. Proven track record leading
               developer teams and shipping end-to-end client builds.
             </motion.p>
 
@@ -206,7 +206,7 @@ export default function HeroSection() {
 
                   {/* Bottom Floating Skill Pills */}
                   <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                    {["Next.js", "Docker", "Python", "React", "Node.js"].map((skill) => (
+                    {["Next.js", "Docker", "CI/CD", "Jenkins", "Python", "React"].map((skill) => (
                       <span
                         key={skill}
                         className="px-2.5 py-1 rounded-lg bg-zinc-950/85 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-indigo-300 shadow-md"

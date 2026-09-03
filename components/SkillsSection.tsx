@@ -27,7 +27,7 @@ interface SkillItem {
 const skillsData: SkillItem[] = [
   // Languages
   { name: "Python", category: "languages", level: "Advanced", iconName: "Python", highlight: true },
-  { name: "JavaScript (ES6+)", category: "languages", level: "Advanced", iconName: "JavaScript", highlight: true },
+  { name: "JavaScript", category: "languages", level: "Advanced", iconName: "JavaScript", highlight: true },
   { name: "Java", category: "languages", level: "Proficient", iconName: "Java" },
   { name: "C", category: "languages", level: "Intermediate", iconName: "C" },
   { name: "C++", category: "languages", level: "Intermediate", iconName: "C++" },
@@ -43,11 +43,15 @@ const skillsData: SkillItem[] = [
   { name: "REST APIs", category: "web", level: "Advanced", iconName: "REST API", highlight: true },
   { name: "Tailwind CSS", category: "web", level: "Advanced", iconName: "Tailwind", highlight: true },
 
-  // Databases & Cloud
+  // DevOps, Cloud & Databases
+  { name: "CI/CD Pipelines", category: "database", level: "Advanced", iconName: "CI/CD", highlight: true },
+  { name: "GitHub Actions", category: "database", level: "Advanced", iconName: "GitHub Actions", highlight: true },
+  { name: "Jenkins", category: "database", level: "Advanced", iconName: "Jenkins", highlight: true },
+  { name: "GitHub Pages", category: "database", level: "Advanced", iconName: "GitHub Pages" },
+  { name: "Docker", category: "database", level: "Advanced", iconName: "Docker", highlight: true },
   { name: "PostgreSQL", category: "database", level: "Advanced", iconName: "PostgreSQL", highlight: true },
   { name: "MySQL", category: "database", level: "Advanced", iconName: "MySQL" },
   { name: "MongoDB", category: "database", level: "Advanced", iconName: "MongoDB", highlight: true },
-  { name: "Docker", category: "database", level: "Advanced", iconName: "Docker", highlight: true },
   { name: "Render", category: "database", level: "Proficient", iconName: "Render" },
   { name: "Netlify", category: "database", level: "Proficient", iconName: "Netlify" },
 
@@ -63,7 +67,7 @@ const categoryTabs = [
   { id: "all", label: "All Tech Stack", icon: Layers },
   { id: "languages", label: "Languages", icon: Terminal },
   { id: "web", label: "Web & Frameworks", icon: Server },
-  { id: "database", label: "Databases & Cloud", icon: Cloud },
+  { id: "database", label: "DevOps & Cloud", icon: Cloud },
   { id: "ai", label: "Data & AI Systems", icon: Brain },
 ];
 
@@ -194,7 +198,7 @@ export default function SkillsSection() {
 
               {/* Bottom Subtle Bar */}
               <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 uppercase tracking-wider">
-                <span>{skill.category}</span>
+                <span>{skill.category === "database" ? "DevOps & Cloud" : skill.category}</span>
                 <Sparkles className="w-3 h-3 text-zinc-600 group-hover:text-cyan-400 transition-colors" />
               </div>
             </motion.div>
