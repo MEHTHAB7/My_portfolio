@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import profilePic from "@/public/profile.jpeg";
 import {
   ArrowRight,
   MapPin,
@@ -188,9 +189,8 @@ export default function HeroSection() {
               <div className="relative rounded-3xl glass-card p-4 sm:p-5 border border-white/15 overflow-hidden shadow-2xl">
                 {/* Image Wrapper */}
                 <div className="relative w-full aspect-[4/4.5] rounded-2xl overflow-hidden bg-zinc-900">
-                  
                   <Image
-                    src="profile.jpeg
+                    src={profilePic}
                     alt="Mehthab N M"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
