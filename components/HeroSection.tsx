@@ -189,7 +189,7 @@ export default function HeroSection() {
                 {/* Image Wrapper */}
                 <div className="relative w-full aspect-[4/4.5] rounded-2xl overflow-hidden bg-zinc-900">
                   <Image
-                    src="michuexct.jpeg"
+                    src="/michuexct.jpeg"
                     alt="Mehthab N M"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
