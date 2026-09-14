@@ -12,63 +12,83 @@ import {
   Terminal,
   Sparkles,
   Server,
-  Cloud,
+  Wrench,
   Layers,
+  HeartHandshake,
+  Globe,
+  Award,
 } from "lucide-react";
 
 interface SkillItem {
   name: string;
-  category: "languages" | "web" | "database" | "ai";
+  category: "languages" | "web" | "database" | "ai" | "tools";
   level: string;
-  iconName: string;
   highlight?: boolean;
 }
 
 const skillsData: SkillItem[] = [
-  // Languages
-  { name: "Python", category: "languages", level: "Advanced", iconName: "Python", highlight: true },
-  { name: "JavaScript", category: "languages", level: "Advanced", iconName: "JavaScript", highlight: true },
-  { name: "Java", category: "languages", level: "Proficient", iconName: "Java" },
-  { name: "C", category: "languages", level: "Intermediate", iconName: "C" },
-  { name: "C++", category: "languages", level: "Intermediate", iconName: "C++" },
-  { name: "PHP", category: "languages", level: "Proficient", iconName: "PHP" },
-  { name: "SQL", category: "languages", level: "Advanced", iconName: "SQL", highlight: true },
+  // Languages (from CV: Python, Java, C, C++, JavaScript, PHP)
+  { name: "Python", category: "languages", level: "Advanced", highlight: true },
+  { name: "JavaScript", category: "languages", level: "Advanced", highlight: true },
+  { name: "Java", category: "languages", level: "Proficient" },
+  { name: "C", category: "languages", level: "Proficient" },
+  { name: "C++", category: "languages", level: "Proficient" },
+  { name: "PHP", category: "languages", level: "Proficient" },
 
-  // Web & Frameworks
-  { name: "React.js", category: "web", level: "Advanced", iconName: "React", highlight: true },
-  { name: "Next.js (App Router)", category: "web", level: "Advanced", iconName: "Next.js", highlight: true },
-  { name: "Node.js", category: "web", level: "Advanced", iconName: "Node.js", highlight: true },
-  { name: "Django", category: "web", level: "Proficient", iconName: "Django" },
-  { name: "Flask", category: "web", level: "Proficient", iconName: "Flask" },
-  { name: "REST APIs", category: "web", level: "Advanced", iconName: "REST API", highlight: true },
-  { name: "Tailwind CSS", category: "web", level: "Advanced", iconName: "Tailwind", highlight: true },
+  // Web & Frameworks (from CV: Django, Flask, React.js, Next.js, Node.js, REST APIs, HTML5, CSS3, Bootstrap)
+  { name: "Django", category: "web", level: "Advanced", highlight: true },
+  { name: "Flask", category: "web", level: "Proficient", highlight: true },
+  { name: "React.js", category: "web", level: "Advanced", highlight: true },
+  { name: "Next.js", category: "web", level: "Advanced", highlight: true },
+  { name: "Node.js", category: "web", level: "Advanced", highlight: true },
+  { name: "REST APIs", category: "web", level: "Advanced", highlight: true },
+  { name: "HTML5", category: "web", level: "Advanced" },
+  { name: "CSS3", category: "web", level: "Advanced" },
+  { name: "Bootstrap", category: "web", level: "Advanced" },
 
-  // DevOps, Cloud & Databases
-  { name: "CI/CD Pipelines", category: "database", level: "Advanced", iconName: "CI/CD", highlight: true },
-  { name: "GitHub Actions", category: "database", level: "Advanced", iconName: "GitHub Actions", highlight: true },
-  { name: "Jenkins", category: "database", level: "Advanced", iconName: "Jenkins", highlight: true },
-  { name: "GitHub Pages", category: "database", level: "Advanced", iconName: "GitHub Pages" },
-  { name: "Docker", category: "database", level: "Advanced", iconName: "Docker", highlight: true },
-  { name: "PostgreSQL", category: "database", level: "Advanced", iconName: "PostgreSQL", highlight: true },
-  { name: "MySQL", category: "database", level: "Advanced", iconName: "MySQL" },
-  { name: "MongoDB", category: "database", level: "Advanced", iconName: "MongoDB", highlight: true },
-  { name: "Render", category: "database", level: "Proficient", iconName: "Render" },
-  { name: "Netlify", category: "database", level: "Proficient", iconName: "Netlify" },
+  // Databases (from CV: MySQL, PostgreSQL, MongoDB, SQL Database Design & Optimization)
+  { name: "MySQL", category: "database", level: "Advanced", highlight: true },
+  { name: "PostgreSQL", category: "database", level: "Advanced", highlight: true },
+  { name: "MongoDB", category: "database", level: "Advanced", highlight: true },
+  { name: "SQL Database Design & Optimization", category: "database", level: "Advanced", highlight: true },
 
-  // Data & AI
-  { name: "Pandas", category: "ai", level: "Advanced", iconName: "Pandas", highlight: true },
-  { name: "NumPy", category: "ai", level: "Advanced", iconName: "NumPy" },
-  { name: "Tableau", category: "ai", level: "Proficient", iconName: "Tableau" },
-  { name: "Generative AI Integration", category: "ai", level: "Advanced", iconName: "GenAI", highlight: true },
-  { name: "Agentic Workflows", category: "ai", level: "Advanced", iconName: "Agents", highlight: true },
+  // Data & AI (from CV: Pandas, NumPy, Tableau, Generative AI Integration, Prompt Engineering, Agentic AI Workflows)
+  { name: "Pandas", category: "ai", level: "Advanced", highlight: true },
+  { name: "NumPy", category: "ai", level: "Advanced", highlight: true },
+  { name: "Tableau", category: "ai", level: "Proficient" },
+  { name: "Generative AI Integration", category: "ai", level: "Advanced", highlight: true },
+  { name: "Prompt Engineering", category: "ai", level: "Advanced", highlight: true },
+  { name: "Agentic AI Workflows", category: "ai", level: "Advanced", highlight: true },
+
+  // Tools & Platforms (from CV: Git/GitHub, Docker, VS Code, Render, Netlify)
+  { name: "Git / GitHub", category: "tools", level: "Advanced", highlight: true },
+  { name: "Docker", category: "tools", level: "Advanced", highlight: true },
+  { name: "VS Code", category: "tools", level: "Advanced" },
+  { name: "Render", category: "tools", level: "Proficient" },
+  { name: "Netlify", category: "tools", level: "Proficient" },
 ];
 
 const categoryTabs = [
   { id: "all", label: "All Tech Stack", icon: Layers },
   { id: "languages", label: "Languages", icon: Terminal },
   { id: "web", label: "Web & Frameworks", icon: Server },
-  { id: "database", label: "DevOps & Cloud", icon: Cloud },
-  { id: "ai", label: "Data & AI Systems", icon: Brain },
+  { id: "database", label: "Databases", icon: Database },
+  { id: "ai", label: "Data & AI", icon: Brain },
+  { id: "tools", label: "Tools & Platforms", icon: Wrench },
+];
+
+const softSkills = [
+  "Communication & Collaboration",
+  "Problem Solving",
+  "Team Leadership",
+  "Fast Learning",
+  "Time Management",
+];
+
+const spokenLanguages = [
+  { lang: "English", proficiency: "Professional Working Proficiency" },
+  { lang: "Malayalam", proficiency: "Native / Bilingual" },
+  { lang: "Hindi", proficiency: "Limited Working Proficiency" },
 ];
 
 export default function SkillsSection() {
@@ -80,6 +100,17 @@ export default function SkillsSection() {
     const matchesSearch = skill.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  const getCategoryLabel = (cat: string) => {
+    switch (cat) {
+      case "languages": return "Language";
+      case "web": return "Web & Framework";
+      case "database": return "Database";
+      case "ai": return "Data & AI";
+      case "tools": return "Tool & Platform";
+      default: return cat;
+    }
+  };
 
   return (
     <section id="skills" className="relative py-28 bg-zinc-950">
@@ -97,7 +128,7 @@ export default function SkillsSection() {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold uppercase tracking-wider"
           >
             <Cpu className="w-3.5 h-3.5" />
-            <span>Technical Competencies</span>
+            <span>Technical Skills Matrix</span>
           </motion.div>
 
           <motion.h2
@@ -117,7 +148,7 @@ export default function SkillsSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            Comprehensive matrix across core programming languages, modern web engineering, containerized cloud infrastructure, and data science workflows.
+            Curated directly from hands-on software engineering, production web apps, cloud containerization, and applied AI systems.
           </motion.p>
         </div>
 
@@ -132,7 +163,7 @@ export default function SkillsSection() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveCategory(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
                     isActive
                       ? "bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-lg shadow-indigo-500/20 scale-105"
                       : "bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:bg-white/10"
@@ -167,8 +198,8 @@ export default function SkillsSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: idx * 0.03 }}
-              whileHover={{ scale: 1.05, y: -4 }}
+              transition={{ duration: 0.3, delay: idx * 0.02 }}
+              whileHover={{ scale: 1.04, y: -4 }}
               className={`group relative rounded-2xl glass-card p-4 border border-white/10 hover:border-indigo-500/40 transition-all duration-200 flex flex-col justify-between ${
                 skill.highlight ? "bg-white/[0.04] border-white/15" : ""
               }`}
@@ -198,7 +229,7 @@ export default function SkillsSection() {
 
               {/* Bottom Subtle Bar */}
               <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 uppercase tracking-wider">
-                <span>{skill.category === "database" ? "DevOps & Cloud" : skill.category}</span>
+                <span>{getCategoryLabel(skill.category)}</span>
                 <Sparkles className="w-3 h-3 text-zinc-600 group-hover:text-cyan-400 transition-colors" />
               </div>
             </motion.div>
@@ -210,6 +241,60 @@ export default function SkillsSection() {
             No matching skills found for &quot;{searchQuery}&quot;.
           </div>
         )}
+
+        {/* Soft Skills & Spoken Languages Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12 pt-8 border-t border-white/10">
+          
+          {/* Soft Skills Box */}
+          <div className="rounded-3xl glass-card p-6 border border-white/10">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
+                <HeartHandshake className="w-4 h-4" />
+              </span>
+              <div>
+                <h3 className="text-white font-bold text-base">Soft Skills & Leadership</h3>
+                <p className="text-zinc-400 text-xs">Professional interpersonal and managerial strengths</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {softSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold text-zinc-200 hover:border-indigo-500/40 hover:text-white transition-colors"
+                >
+                  ✨ {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Languages Spoken Box */}
+          <div className="rounded-3xl glass-card p-6 border border-white/10">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                <Globe className="w-4 h-4" />
+              </span>
+              <div>
+                <h3 className="text-white font-bold text-base">Languages (Communication)</h3>
+                <p className="text-zinc-400 text-xs">Multilingual working proficiency</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {spokenLanguages.map((langItem) => (
+                <div
+                  key={langItem.lang}
+                  className="p-3 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between"
+                >
+                  <span className="text-white font-bold text-sm">{langItem.lang}</span>
+                  <span className="text-zinc-400 text-[11px] mt-1">{langItem.proficiency}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
 
       </div>
     </section>

@@ -11,6 +11,7 @@ const navItems = [
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Education", href: "#education" },
+  { name: "Certifications", href: "#certifications" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -101,7 +102,7 @@ export default function Navbar() {
               <GithubIcon className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com/in/mehthab-n-m-637611344"
+              href="https://linkedin.com/in/mehthab-n-m"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 hover:border-cyan-500/50 transition-all duration-200"
@@ -168,7 +169,7 @@ export default function Navbar() {
                     <GithubIcon className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://linkedin.com/in/mehthab-n-m-637611344"
+                    href="https://linkedin.com/in/mehthab-n-m"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
@@ -176,7 +177,7 @@ export default function Navbar() {
                     <LinkedinIcon className="w-5 h-5" />
                   </a>
                   <a
-                    href="mailto:mehthab225@gmail.com"
+                    href="mailto:mehthabnm7@gmail.com"
                     className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
                   >
                     <Mail className="w-5 h-5" />

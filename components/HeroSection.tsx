@@ -7,37 +7,46 @@ import {
   ArrowRight,
   MapPin,
   Mail,
+  Phone,
   Award,
   Terminal,
   Users,
   Code,
   Download,
   Sparkles,
+  ShieldCheck,
 } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 
 export default function HeroSection() {
   const metrics = [
     {
-      value: "8",
-      label: "Showcase Projects",
-      detail: "PaaS, Auth, ML & Web Apps",
-      icon: Code,
-      color: "from-indigo-500 to-indigo-400",
+      value: "Best Performer",
+      label: "Logix Space Award",
+      detail: "LinkUrCodes Full-Stack Trainee",
+      icon: Award,
+      color: "from-amber-400 to-amber-300",
     },
     {
-      value: "7",
-      label: "Engineer Team Lead",
-      detail: "Hackathon & Agile Builds",
+      value: "2 Teams Led",
+      label: "Engineering Team Lead",
+      detail: "7 & 4 Engineers (Hackathon & ML)",
       icon: Users,
-      color: "from-sky-500 to-cyan-400",
+      color: "from-sky-400 to-cyan-400",
     },
     {
       value: "30/30",
       label: "ICT Data Science Score",
-      detail: "Certified Specialist",
-      icon: Award,
+      detail: "400 hrs Certified Specialist",
+      icon: Code,
       color: "from-emerald-400 to-teal-400",
+    },
+    {
+      value: "CPL Rank",
+      label: "National Cadet Corps",
+      detail: "NCC 'A' & 'B' Leadership Certs",
+      icon: ShieldCheck,
+      color: "from-indigo-400 to-purple-400",
     },
   ];
 
@@ -56,25 +65,33 @@ export default function HeroSection() {
           {/* Left Column: Text & Hero Content */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             
-            {/* Status Badge & Location */}
+            {/* Status Badge & Location & Phone */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5"
             >
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide backdrop-blur-md shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span>Open for Full-Stack Development Opportunities</span>
+                <span>Open for Full-Stack Opportunities</span>
               </div>
 
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium backdrop-blur-md">
                 <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Kochi, Kerala, India</span>
               </div>
+
+              <a
+                href="tel:+919526256761"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-indigo-500/40 text-zinc-300 hover:text-white text-xs font-medium backdrop-blur-md transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5 text-indigo-400" />
+                <span>+91 95262 56761</span>
+              </a>
             </motion.div>
 
             {/* Headline */}
@@ -95,16 +112,16 @@ export default function HeroSection() {
               </p>
             </motion.div>
 
-            {/* Bio Subtitle */}
+            {/* Bio Subtitle mirroring CV summary */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal"
             >
-              BCA graduate & MCA candidate experienced in building production web applications,
-              automated CI/CD pipelines (GitHub Actions, Jenkins), and AI-driven workflows. Proven track record leading
-              developer teams and shipping end-to-end client builds.
+              Full-Stack Developer with hands-on experience shipping web applications end-to-end using{" "}
+              <span className="text-white font-semibold">Python, React</span>, and{" "}
+              <span className="text-white font-semibold">SQL/NoSQL</span> databases. Skilled in designing clean APIs, optimizing data models, and leading engineering teams from design through deployment, with a growing specialization in applied AI and data-driven systems.
             </motion.p>
 
             {/* Action Buttons & Socials */}
@@ -131,12 +148,11 @@ export default function HeroSection() {
               </a>
 
               <a
-                href="#contact"
+                href="#experience"
                 className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 text-sm font-medium transition-all"
-                title="Contact to request full resume"
               >
                 <Download className="w-4 h-4 text-indigo-400" />
-                <span className="hidden sm:inline">Resume</span>
+                <span className="hidden sm:inline">Experience</span>
               </a>
             </motion.div>
 
@@ -153,20 +169,23 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all duration-200"
+                aria-label="GitHub Profile"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://linkedin.com/in/mehthab-n-m-637611344"
+                href="https://linkedin.com/in/mehthab-n-m"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-200"
+                aria-label="LinkedIn Profile"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a
-                href="mailto:mehthab225@gmail.com"
+                href="mailto:mehthabnm7@gmail.com"
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-200"
+                aria-label="Send Email"
               >
                 <Mail className="w-4 h-4" />
               </a>
@@ -207,7 +226,7 @@ export default function HeroSection() {
 
                   {/* Bottom Floating Skill Pills */}
                   <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                    {["Next.js", "Docker", "CI/CD", "Jenkins", "Python", "React"].map((skill) => (
+                    {["Python", "Django", "React.js", "Next.js", "Docker", "REST APIs", "SQL/NoSQL", "GenAI"].map((skill) => (
                       <span
                         key={skill}
                         className="px-2.5 py-1 rounded-lg bg-zinc-950/85 backdrop-blur-md border border-white/15 text-[11px] font-semibold text-indigo-300 shadow-md"
@@ -222,9 +241,9 @@ export default function HeroSection() {
                 <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
                   <div>
                     <h3 className="text-white font-bold text-base">Mehthab N M</h3>
-                    <p className="text-zinc-400 text-xs">MCA Candidate & Full Stack Developer</p>
+                    <p className="text-zinc-400 text-xs">Full-Stack Developer • MCA Candidate</p>
                   </div>
-                  <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
+                  <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400" title="Best Performer Award, LinkUrCodes">
                     <Award className="w-5 h-5" />
                   </div>
                 </div>
@@ -239,7 +258,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-16 sm:mt-20"
         >
           {metrics.map((metric, idx) => {
             const IconComponent = metric.icon;
@@ -250,18 +269,18 @@ export default function HeroSection() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className={`text-3xl sm:text-4xl font-extrabold bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
+                    <div className={`text-2xl sm:text-3xl font-extrabold bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
                       {metric.value}
                     </div>
-                    <div className="text-white font-bold text-base mt-1">
+                    <div className="text-white font-bold text-sm mt-1">
                       {metric.label}
                     </div>
                     <div className="text-zinc-400 text-xs mt-0.5">
                       {metric.detail}
                     </div>
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 group-hover:text-indigo-400 group-hover:scale-110 group-hover:border-indigo-500/30 transition-all">
-                    <IconComponent className="w-6 h-6" />
+                  <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 group-hover:text-indigo-400 group-hover:scale-110 group-hover:border-indigo-500/30 transition-all shrink-0">
+                    <IconComponent className="w-5 h-5" />
                   </div>
                 </div>
               </div>

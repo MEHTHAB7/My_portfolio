@@ -23,27 +23,72 @@ import { GithubIcon } from "@/components/SocialIcons";
 const projectsData: ProjectItem[] = [
   {
     id: "zynkarashift",
-    title: "Zynkarashift",
-    category: "Self-Hosted PaaS",
-    badge: "FLAGSHIP PLATFORM",
+    title: "ZynkaraShift – Self-Hosted PaaS",
+    category: "Self-Hosted Platform-as-a-Service",
+    badge: "CV SPOTLIGHT • FLAGSHIP",
     isFlagship: true,
+    period: "Jun 2026 – Jul 2026",
+    roleOrTeam: "Lead Architect & Developer",
     description:
-      "Zero-cost PaaS deploying web apps directly from GitHub repos or Docker containers with multi-tenancy routing & AI deployment copilot.",
+      "Designed and built a zero-cost PaaS that deploys web applications directly from GitHub repositories or Docker images, featuring an AI-driven deployment copilot, custom multi-tenancy routing, and container orchestration.",
     fullOverview:
-      "Zynkarashift is a complete self-hosted Platform-as-a-Service engineered to bypass high cloud hosting fees. It features dynamic reverse proxy routing, multi-tenant container isolation, automated SSL via Let's Encrypt, and an AI-driven deployment copilot that inspects build logs to automatically diagnose deployment failures.",
-    tech: ["Node.js", "Docker", "CI/CD Pipelines", "GitHub Actions", "Tailwind"],
+      "ZynkaraShift is a complete self-hosted Platform-as-a-Service engineered to eliminate high cloud hosting fees. It deploys web applications directly from GitHub repositories or Docker images, featuring custom multi-tenancy reverse proxy routing, container orchestration, and an AI-driven deployment copilot that inspects build logs in real time to diagnose errors.",
+    tech: ["Node.js", "Docker", "GitHub", "Reverse Proxy", "Multi-Tenancy", "Container Orchestration", "AI Copilot"],
     keyHighlights: [
-      "Zero-downtime container deployments via Docker API",
-      "Automated CI/CD build pipeline & GitHub webhook log streaming",
-      "Multi-tenant reverse proxy routing with custom domains",
-      "AI Copilot diagnosing build failures in real time",
+      "Zero-cost PaaS deploying web apps directly from GitHub repos or Docker images",
+      "AI-driven deployment copilot diagnosing build failures from real-time log streams",
+      "Custom multi-tenancy routing engine with automated reverse proxy & domain mapping",
+      "Container lifecycle orchestration and automated environment isolation",
     ],
     githubUrl: "https://github.com/MEHTHAB7/Zynkara_Shift",
+  },
+  {
+    id: "task-management-system",
+    title: "Role-Based Task Management System",
+    category: "Hackathon Project • Team Lead",
+    badge: "CV SPOTLIGHT • 7 ENGINEERS",
+    period: "Hackathon Project",
+    roleOrTeam: "Team Lead (7 engineers)",
+    description:
+      "Led a 7-member team to design, build, and deploy a role-based task management platform with authentication and automated task workflows, owning UI/UX and backend integration.",
+    fullOverview:
+      "Engineered during a high-stakes hackathon, leading a 7-member developer team. Delivered a production-ready role-based task coordination system with strict permission boundaries, automated task status transitions, email notifications, and an intuitive UI backed by PHP and SQL.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "XAMPP", "Team Leadership"],
+    keyHighlights: [
+      "Led 7-member team to design, build, and deploy the platform under hackathon deadlines",
+      "Owned end-to-end UI/UX architecture and responsive interface design",
+      "Built role-based access control (RBAC) with secure session authentication",
+      "Implemented automated task workflows, status tracking, and backend SQL integration",
+    ],
+    githubUrl: "https://github.com/MEHTHAB7/Task_Management_App",
+  },
+  {
+    id: "fraud-detection",
+    title: "Credit Card Fraud Detection System",
+    category: "Academic Project • Team Lead",
+    badge: "CV SPOTLIGHT • 4 ENGINEERS",
+    period: "Academic Project",
+    roleOrTeam: "Team Lead (4 engineers)",
+    description:
+      "Directed a 4-member team to build a machine-learning-based fraud detection tool, managing testing, code review, and final delivery.",
+    fullOverview:
+      "Directed a 4-member academic machine learning engineering squad to construct an intelligent fraud detection system. Handled dataset balancing, classification model training, and integration into a Python/Flask web application backed by MongoDB.",
+    tech: ["Python", "Flask", "MongoDB", "HTML", "CSS", "Scikit-Learn", "Machine Learning"],
+    keyHighlights: [
+      "Directed a 4-member team through full ML lifecycle, code reviews, and testing",
+      "Developed high-precision machine learning classification model for fraudulent transactions",
+      "Built responsive Python/Flask REST application interfacing with MongoDB",
+      "Conducted thorough testing suites and validation to ensure reliable detection",
+    ],
+    githubUrl: "https://github.com/MEHTHAB7/credit_card_fraud_detection",
   },
   {
     id: "zynkaraauth",
     title: "ZynkaraAuth",
     category: "Authentication Platform",
+    badge: "SECURITY ENGINE",
+    period: "2025",
+    roleOrTeam: "Backend Engineer",
     description:
       "Centralized identity and authentication engine managing secure user sessions, OAuth integrations, and JWT verification.",
     fullOverview:
@@ -61,6 +106,9 @@ const projectsData: ProjectItem[] = [
     id: "wedding-platform",
     title: "Wedding Company Platform",
     category: "Commercial Client Build",
+    badge: "PRODUCTION BUILD",
+    period: "Client Project",
+    roleOrTeam: "Full-Stack Developer",
     description:
       "Production application for a client featuring media galleries, booking workflows, and responsive high-performance UI.",
     fullOverview:
@@ -75,26 +123,12 @@ const projectsData: ProjectItem[] = [
     githubUrl: "https://github.com/MEHTHAB7/wedding_company",
   },
   {
-    id: "fraud-detection",
-    title: "Credit Card Fraud Detection",
-    category: "ML Lead Project (4 Engineers)",
-    description:
-      "Machine learning pipeline analyzing transaction streams in real time to detect anomalous and fraudulent patterns.",
-    fullOverview:
-      "Led a 4-member machine learning engineering team to build a predictive fraud detection engine. Trained on imbalanced transaction data using SMOTE techniques, Random Forest, and XGBoost classification models.",
-    tech: ["Python", "MongoDB", "Scikit-Learn", "Pandas", "ML Classification"],
-    keyHighlights: [
-      "SMOTE oversampling for highly imbalanced dataset handling",
-      "Real-time transaction anomaly scoring REST service",
-      "Led 4 ML engineers through feature engineering & cross-validation",
-      "Precision-Recall optimization achieving 98.4% ROC-AUC score",
-    ],
-    githubUrl: "https://github.com/MEHTHAB7/credit_card_fraud_detection",
-  },
-  {
     id: "ocean-voyage",
     title: "Ocean Voyage",
     category: "ICT & Royal Caribbean Hackathon",
+    badge: "HACKATHON",
+    period: "24h Hackathon",
+    roleOrTeam: "Full-Stack Developer",
     description:
       "Interactive maritime management system developed for high-stakes competition challenges.",
     fullOverview:
@@ -112,6 +146,8 @@ const projectsData: ProjectItem[] = [
     id: "interior-showcase",
     title: "Interior Design Showcase",
     category: "Design Portfolio Site",
+    period: "Client Project",
+    roleOrTeam: "Frontend Engineer",
     description:
       "Aesthetic, image-rich portfolio web app engineered for an interior designer featuring spatial project showcases.",
     fullOverview:
@@ -126,31 +162,16 @@ const projectsData: ProjectItem[] = [
     githubUrl: "https://github.com/MEHTHAB7/Web-Page-App",
   },
   {
-    id: "task-sync",
-    title: "Role-Based Task Sync",
-    category: "Team Lead - Hackathon (7 Engineers)",
-    description:
-      "Led a 7-member engineering team to design and build a role-based task management system with automated workflows.",
-    fullOverview:
-      "Spearheaded a 7-member engineering squad to create a enterprise task coordination app. Built with PHP and SQL backend, featuring role hierarchy delegation, task status state machines, and email notification webhooks.",
-    tech: ["PHP", "SQL", "JavaScript", "XAMPP", "Team Lead"],
-    keyHighlights: [
-      "Led 7-member developer team from architectural specs to demo",
-      "Strict role-based permission hierarchy & task status pipelines",
-      "Automated email notification triggers and task deadline alerts",
-      "Optimized MySQL relational schema for high concurrency",
-    ],
-    githubUrl: "https://github.com/MEHTHAB7/Task_Management_App",
-  },
-  {
     id: "tictactoe-mobile",
     title: "Tic Tac Toe Mobile",
     category: "Mobile App Game",
+    period: "Mobile Project",
+    roleOrTeam: "App Developer",
     description:
       "Cross-platform mobile application game featuring custom UI transitions and game loop state management.",
     fullOverview:
       "A cross-platform mobile game built with Flutter and React Native principles. Features smooth touch feedback, single-player vs Minimax AI mode, local 2-player mode, and custom particle victory animations.",
-    tech: ["Flutter", "React Native", "Mobile UX", "State Management"],
+    tech: ["Flutter", "Dart", "Mobile UX", "State Management"],
     keyHighlights: [
       "Minimax algorithm for unbeatably smart AI opponent mode",
       "60fps touch haptics and particle effect transitions",
@@ -163,10 +184,11 @@ const projectsData: ProjectItem[] = [
 
 const categoryFilters = [
   { id: "all", label: "All Projects" },
-  { id: "paas", label: "PaaS & Auth" },
-  { id: "client", label: "Client Builds" },
+  { id: "cv", label: "CV Resume Projects" },
+  { id: "paas", label: "PaaS & Cloud" },
+  { id: "team", label: "Team Lead & Hackathons" },
   { id: "ai", label: "AI & ML" },
-  { id: "team", label: "Team Lead & Apps" },
+  { id: "client", label: "Client Builds" },
 ];
 
 export default function ProjectsSection() {
@@ -175,10 +197,11 @@ export default function ProjectsSection() {
 
   const filteredProjects = projectsData.filter((project) => {
     if (selectedFilter === "all") return true;
+    if (selectedFilter === "cv") return project.badge?.includes("CV SPOTLIGHT");
     if (selectedFilter === "paas") return project.category.includes("PaaS") || project.category.includes("Authentication");
-    if (selectedFilter === "client") return project.category.includes("Client");
-    if (selectedFilter === "ai") return project.category.includes("ML") || project.category.includes("Hackathon");
-    if (selectedFilter === "team") return project.category.includes("Team Lead") || project.category.includes("Mobile");
+    if (selectedFilter === "team") return project.category.includes("Team Lead") || project.category.includes("Hackathon");
+    if (selectedFilter === "ai") return project.category.includes("ML") || project.tech.includes("AI Copilot");
+    if (selectedFilter === "client") return project.category.includes("Client") || project.category.includes("Design");
     return true;
   });
 

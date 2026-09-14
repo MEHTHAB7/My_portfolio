@@ -43,7 +43,7 @@ export default function Footer() {
             </div>
             <div>
               <span className="font-extrabold tracking-wider text-base">MEHTHAB N M</span>
-              <p className="text-zinc-500 text-xs">Full-Stack Developer & AI Innovator</p>
+              <p className="text-zinc-500 text-xs">Full-Stack Developer • Python, React & Applied AI</p>
             </div>
           </div>
 
@@ -66,7 +66,7 @@ export default function Footer() {
               <GithubIcon className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com/in/mehthab-n-m-637611344"
+              href="https://linkedin.com/in/mehthab-n-m"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-colors"
@@ -75,7 +75,7 @@ export default function Footer() {
               <LinkedinIcon className="w-4 h-4" />
             </a>
             <a
-              href="mailto:mehthab225@gmail.com"
+              href="mailto:mehthabnm7@gmail.com"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-colors"
               aria-label="Email"
             >

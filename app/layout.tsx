@@ -13,25 +13,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mehthab N M | Full-Stack Developer & AI Systems Engineer",
+  title: "Mehthab N M | Full-Stack Developer",
   description:
-    "BCA graduate & MCA candidate experienced in building production web applications, automated deployment platforms (Zynkarashift), and AI-driven workflows. Proven track record leading developer teams.",
+    "Full-Stack Developer with hands-on experience shipping web applications end-to-end using Python, React, Next.js, and SQL/NoSQL databases. Proven record leading engineering teams, building cloud/PaaS solutions, and specializing in applied AI and data-driven systems.",
   keywords: [
     "Mehthab N M",
     "Full-Stack Developer",
-    "React Developer",
+    "Python Developer",
+    "React.js",
     "Next.js",
-    "Zynkarashift",
-    "Python",
+    "Django",
+    "Flask",
+    "Node.js",
+    "ZynkaraShift",
+    "Docker",
     "Data Science",
-    "Kochi Kerala",
-    "Web Developer Portfolio",
+    "Machine Learning",
+    "Kochi Kerala India",
+    "Software Engineer",
   ],
   authors: [{ name: "Mehthab N M" }],
   openGraph: {
     title: "Mehthab N M | Full-Stack Developer",
     description:
-      "Full-Stack Developer & MCA candidate building production web apps, automated PaaS platforms, and AI workflows.",
+      "Full-Stack Developer with hands-on experience shipping web applications end-to-end using Python, React, and SQL/NoSQL databases with specialization in applied AI and data-driven systems.",
     url: "https://mehthab.dev",
     siteName: "Mehthab N M Portfolio",
     locale: "en_US",
@@ -41,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mehthab N M | Full-Stack Developer",
     description:
-      "Full-Stack Developer & MCA candidate building production web apps, automated PaaS platforms, and AI workflows.",
+      "Full-Stack Developer shipping web applications end-to-end using Python, React, and SQL/NoSQL databases.",
   },
 };
 

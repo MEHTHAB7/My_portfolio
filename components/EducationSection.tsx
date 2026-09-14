@@ -3,141 +3,88 @@
 import { motion } from "framer-motion";
 import {
   GraduationCap,
-  Award,
-  BookOpen,
   Calendar,
   Building2,
   ChevronRight,
+  BookOpen,
+  Award,
   Sparkles,
-  CheckCircle2,
-  Brain,
-  Code,
 } from "lucide-react";
 
-interface EducationItem {
+interface DegreeItem {
   id: string;
   degree: string;
   institution: string;
   period: string;
   statusPill: string;
-  category: "degree" | "certification";
+  highlightBadge: string;
+  focus: string;
   description: string[];
-  skills: string[];
-  highlightBadge?: string;
-  credentialId?: string;
-  awardBadge?: string;
+  coursework: string[];
 }
 
-const educationData: EducationItem[] = [
-  {
-    id: "hackerrank-frontend-react",
-    degree: "HackerRank Certified: Frontend Developer (React)",
-    institution: "HackerRank",
-    period: "Certified Credential",
-    statusPill: "🏆 Verified Role Certification",
-    credentialId: "CDA7C4373E05",
-    category: "certification",
-    highlightBadge: "HackerRank Verified",
-    description: [
-      "Rigorously benchmarked for production-ready JavaScript performance, modular state management, and component architecture against enterprise standards.",
-      "Demonstrated advanced proficiency in React hooks, state flow, DOM optimization, and enterprise component lifecycles.",
-    ],
-    skills: ["React.js", "JavaScript (ES6+)", "State Management", "Component Architecture", "Performance Optimization"],
-  },
-  {
-    id: "camerin-python-fullstack",
-    degree: "Python Full Stack (Django + React + AI)",
-    institution: "Camerin Institute of Upskill",
-    period: "May 11, 2026 – Present",
-    statusPill: "⚡ Currently Pursuing",
-    awardBadge: "🏆 Best Student of the Month – July",
-    category: "certification",
-    highlightBadge: "🤖 Django + React + AI",
-    description: [
-      "Honored as Best Student of the Month (July) for academic excellence, active participation, and outstanding execution in Python full-stack engineering.",
-      "Specializing in Python full-stack engineering with Django backend framework, REST API development, and modern React frontend architectures.",
-      "Integrating AI and Machine Learning models into full-stack web applications for intelligent automated features.",
-    ],
-    skills: ["Python", "Django", "React.js", "AI Integration", "REST APIs", "Full Stack"],
-  },
+const degreesData: DegreeItem[] = [
   {
     id: "mca-ignou",
     degree: "Master of Computer Applications (MCA)",
-    institution: "IGNOU (Indira Gandhi National Open University)",
-    period: "2026 – Present",
-    statusPill: "🎓 Currently Pursuing",
-    category: "degree",
-    highlightBadge: "Master's Degree",
+    institution: "Indira Gandhi National Open University (IGNOU)",
+    period: "Jul 2026 – Jun 2028",
+    statusPill: "⚡ In Progress",
+    highlightBadge: "Master's Degree (Pursuing)",
+    focus: "Advanced Software Engineering, Enterprise Cloud & Applied AI",
     description: [
-      "Enrolled in Master's degree program focusing on advanced software engineering, enterprise systems architecture, database management, and computer science theory.",
+      "Currently pursuing Master of Computer Applications, deepening expertise in enterprise systems architecture, advanced database management, and scalable cloud solutions.",
+      "Conducting practical coursework in distributed systems, algorithm analysis, software project management, and machine learning integration.",
     ],
-    skills: ["Software Architecture", "Advanced Computer Science", "Database Systems", "System Design"],
-  },
-  {
-    id: "data-science-cert",
-    degree: "Certified Specialist in Data Science & Analytics",
-    institution: "ICT Academy of Kerala",
-    period: "Certified Credential",
-    statusPill: "⭐ Score 30/30 (Perfect Distinction)",
-    category: "certification",
-    highlightBadge: "Perfect 30/30 Distinction",
-    description: [
-      "Mastered data wrangling, Exploratory Data Analysis (EDA), and machine learning pipelines in Python (Pandas, NumPy, Scikit-Learn).",
-      "Achieved a flawless 30/30 distinction score across practical assessments, data modeling assignments, and capstone evaluation.",
-      "Designed predictive classification models and interactive data visualization dashboards using Tableau.",
+    coursework: [
+      "Software Systems Architecture",
+      "Advanced Data Structures & Algorithms",
+      "Enterprise Database Management",
+      "Distributed Cloud Computing",
+      "Object-Oriented Analysis & Design",
     ],
-    skills: ["Python", "Pandas", "Scikit-Learn", "Tableau", "Machine Learning", "EDA"],
   },
   {
     id: "bca-calicut-university",
     degree: "Bachelor of Computer Applications (BCA)",
-    institution: "Nirmala College of Arts and Science (University of Calicut)",
-    period: "Degree Completed",
-    statusPill: "🎓 Degree Completed",
-    category: "degree",
+    institution: "Nirmala College of Arts and Science, Calicut University",
+    period: "Aug 2023 – Mar 2026",
+    statusPill: "🎓 Focus: Programming, Web Dev & ML",
     highlightBadge: "Bachelor's Degree",
+    focus: "Programming, Web Development, Machine Learning",
     description: [
-      "Completed Bachelor of Computer Applications, acquiring core expertise in software engineering, object-oriented programming, data structures, algorithms, and web technologies.",
+      "Graduated with core academic focus in Programming, Web Development, and Machine Learning.",
+      "Built a solid foundation in computer science theory, full-stack application development, relational database systems, and hands-on laboratory projects.",
+      "Served as team lead on cross-functional academic and competition builds.",
     ],
-    skills: ["Computer Applications", "C/C++", "Java", "Web Technologies", "DBMS", "Data Structures"],
-  },
-  {
-    id: "google-developer-program",
-    degree: "Google Developer Program — Premium Tier",
-    institution: "Google Developers",
-    period: "Jul 2026",
-    statusPill: "🌐 Verified Membership",
-    category: "degree",
-    highlightBadge: "Google Developer Program",
-    description: [
-      "Completed hands-on technical labs: API Key Management and Security, AI-Assisted Data Science with BigQuery, Firebase Phone Number Verification for Android, and AI Speech Recognition with TensorFlow Lite for Microcontrollers.",
-      "Active member of the Google Developer Program, engaging with the latest tools across cloud, AI, and mobile development.",
+    coursework: [
+      "Web Technologies (HTML5, CSS3, JavaScript, PHP)",
+      "Python & Java Programming",
+      "Database Management Systems & SQL",
+      "Data Structures and Algorithms",
+      "Machine Learning Fundamentals",
     ],
-    skills: ["Google Cloud", "BigQuery", "Firebase", "TensorFlow Lite", "API Security"],
   },
 ];
 
 export default function EducationSection() {
-  const degrees = educationData.filter((item) => item.category === "degree");
-  const certifications = educationData.filter((item) => item.category === "certification");
-
   return (
     <section id="education" className="relative py-28 bg-zinc-950/90 overflow-hidden">
-      {/* Ambient Background Glow */}
-      <div className="absolute top-1/3 right-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 left-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Ambient Glow */}
+      <div className="absolute top-1/3 left-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold uppercase tracking-wider"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold uppercase tracking-wider"
           >
             <GraduationCap className="w-3.5 h-3.5" />
-            <span>Academic & Professional Credentials</span>
+            <span>Academic Background</span>
           </motion.div>
 
           <motion.h2
@@ -147,7 +94,7 @@ export default function EducationSection() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight"
           >
-            Education & <span className="text-gradient-cyan">Certifications</span>
+            Formal <span className="text-gradient-indigo">Education</span>
           </motion.h2>
 
           <motion.p
@@ -157,41 +104,26 @@ export default function EducationSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            Formal computer science degrees combined with specialized full-stack engineering and AI upskilling programs.
+            Academic computer science credentials with specialization in programming, web development, and machine learning.
           </motion.p>
         </div>
 
-        {/* 2-Column Grid: Degrees vs Professional Upskilling */}
+        {/* 2-Column Grid for the Degrees */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          
-          {/* Left Column: Upskilling & Certifications */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-2.5 mb-2 px-1">
-              <span className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-                <Brain className="w-5 h-5" />
-              </span>
-              <h3 className="text-xl font-bold text-white tracking-wide">
-                Specialized Upskilling & Certifications
-              </h3>
-            </div>
-
-            {certifications.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className={`group relative rounded-3xl glass-card p-6 sm:p-7 border ${
-                  item.awardBadge
-                    ? "border-amber-500/35 hover:border-amber-400/60 shadow-lg shadow-amber-500/5"
-                    : "border-white/10"
-                } glass-card-hover`}
-              >
+          {degreesData.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="group relative rounded-3xl glass-card p-6 sm:p-8 border border-white/10 glass-card-hover flex flex-col justify-between"
+            >
+              <div>
                 {/* Header Badge & Period */}
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold flex items-center gap-1.5">
-                    <Calendar className="w-3 h-3 text-cyan-400" />
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                  <span className="px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-indigo-400" />
                     {item.period}
                   </span>
 
@@ -200,32 +132,30 @@ export default function EducationSection() {
                   </span>
                 </div>
 
-                {/* Award Highlight Badge if present */}
-                {item.awardBadge && (
-                  <div className="mb-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold shadow-sm">
-                    <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    <span>{item.awardBadge}</span>
-                  </div>
-                )}
+                {/* Highlight Badge */}
+                <div className="mb-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-semibold">
+                  <Sparkles className="w-3 h-3 text-cyan-400" />
+                  <span>{item.highlightBadge}</span>
+                </div>
 
-                {/* Title & Institution */}
-                <h4 className="text-xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                {/* Degree Title */}
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors mb-1">
                   {item.degree}
-                </h4>
-                <div className="text-zinc-400 text-sm font-medium flex flex-wrap items-center gap-3 mt-1 mb-4">
-                  <span className="flex items-center gap-1.5">
-                    <Building2 className="w-4 h-4 text-indigo-400" />
-                    <span>{item.institution}</span>
-                  </span>
-                  {item.credentialId && (
-                    <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono">
-                      Credential ID: {item.credentialId}
-                    </span>
-                  )}
+                </h3>
+
+                {/* Institution */}
+                <div className="text-zinc-300 text-sm font-medium flex items-center gap-1.5 mb-2">
+                  <Building2 className="w-4 h-4 text-indigo-400 shrink-0" />
+                  <span>{item.institution}</span>
+                </div>
+
+                {/* Focus Line */}
+                <div className="text-xs text-cyan-400 font-semibold mb-5">
+                  Focus: {item.focus}
                 </div>
 
                 {/* Description Bullets */}
-                <ul className="space-y-2 mb-6 text-zinc-300 text-xs sm:text-sm">
+                <ul className="space-y-2.5 mb-6 text-zinc-300 text-xs sm:text-sm">
                   {item.description.map((desc, dIdx) => (
                     <li key={dIdx} className="flex items-start gap-2">
                       <ChevronRight className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
@@ -233,134 +163,28 @@ export default function EducationSection() {
                     </li>
                   ))}
                 </ul>
+              </div>
 
-                {/* Skill Badges */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap gap-1.5">
-                  {item.skills.map((skill) => (
+              {/* Coursework Tags */}
+              <div className="pt-5 border-t border-white/10">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3">
+                  <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Key Subject Areas</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {item.coursework.map((course) => (
                     <span
-                      key={skill}
+                      key={course}
                       className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-medium text-zinc-300"
                     >
-                      {skill}
+                      {course}
                     </span>
                   ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Right Column: Academic Degrees */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-2.5 mb-2 px-1">
-              <span className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
-                <GraduationCap className="w-5 h-5" />
-              </span>
-              <h3 className="text-xl font-bold text-white tracking-wide">
-                Academic Degrees & Programs
-              </h3>
-            </div>
-
-            {degrees.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className={`group relative rounded-3xl glass-card p-6 sm:p-7 border ${
-                  item.awardBadge
-                    ? "border-amber-500/35 hover:border-amber-400/60 shadow-lg shadow-amber-500/5"
-                    : "border-white/10"
-                } glass-card-hover`}
-              >
-                {/* Header Badge & Period */}
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span className="px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold flex items-center gap-1.5">
-                    <Calendar className="w-3 h-3 text-indigo-400" />
-                    {item.period}
-                  </span>
-
-                  <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
-                    {item.statusPill}
-                  </span>
-                </div>
-
-                {/* Award Highlight Badge if present */}
-                {item.awardBadge && (
-                  <div className="mb-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold shadow-sm">
-                    <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    <span>{item.awardBadge}</span>
-                  </div>
-                )}
-
-                {/* Title & Institution */}
-                <h4 className="text-xl font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors">
-                  {item.degree}
-                </h4>
-                <div className="text-zinc-400 text-sm font-medium flex items-center gap-1.5 mt-1 mb-4">
-                  <Building2 className="w-4 h-4 text-indigo-400" />
-                  <span>{item.institution}</span>
-                </div>
-
-                {/* Description Bullets */}
-                <ul className="space-y-2 mb-6 text-zinc-300 text-xs sm:text-sm">
-                  {item.description.map((desc, dIdx) => (
-                    <li key={dIdx} className="flex items-start gap-2">
-                      <ChevronRight className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-                      <span className="leading-relaxed">{desc}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Skill Badges */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap gap-1.5">
-                  {item.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-medium text-zinc-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
+              </div>
+            </motion.div>
+          ))}
         </div>
-
-        {/* Full-Width Supplementary Section: Workshops & Training */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/10"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <Award className="w-4 h-4 text-zinc-400" />
-            <h4 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
-              Additional Workshops & Training
-            </h4>
-          </div>
-
-          <div className="flex flex-wrap gap-2.5">
-            {[
-              "Google Cloud Workshop",
-              "Flutter Workshop",
-              "Cybersecurity Workshop",
-              "AI & Data Science Workshop",
-              "Python Internship",
-            ].map((workshop) => (
-              <span
-                key={workshop}
-                className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-300 hover:text-white hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-all duration-200"
-              >
-                {workshop}
-              </span>
-            ))}
-          </div>
-        </motion.div>
 
       </div>
     </section>

@@ -9,6 +9,8 @@ export interface ProjectItem {
   title: string;
   category: string;
   badge?: string;
+  period?: string;
+  roleOrTeam?: string;
   description: string;
   fullOverview: string;
   tech: string[];
@@ -62,6 +64,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <span className="px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
               {project.category}
             </span>
+            {project.roleOrTeam && (
+              <span className="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
+                👥 {project.roleOrTeam}
+              </span>
+            )}
+            {project.period && (
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium">
+                📅 {project.period}
+              </span>
+            )}
             {project.isFlagship && (
               <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-indigo-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-wider">
                 🌟 FLAGSHIP PLATFORM

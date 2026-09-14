@@ -11,11 +11,13 @@ import {
   Sparkles,
   MessageSquare,
   ArrowUpRight,
+  Phone,
 } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 
 export default function ContactSection() {
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -25,12 +27,19 @@ export default function ContactSection() {
     message: "",
   });
 
-  const email = "mehthab225@gmail.com";
+  const email = "mehthabnm7@gmail.com";
+  const phone = "+91 95262 56761";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -83,7 +92,7 @@ export default function ContactSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            Have a project in mind, need a full-stack engineer, or want to discuss automated cloud deployments? Drop a message below.
+            Have a full-stack opportunity, software engineering project, or want to discuss applied AI? Reach out through any of the channels below.
           </motion.p>
         </div>
 
@@ -95,30 +104,32 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-5"
           >
-            {/* Direct Email Card with Copy Micro-Interaction */}
-            <div className="group relative rounded-3xl glass-card p-6 border border-white/10 glass-card-hover overflow-hidden">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
-                  <Mail className="w-6 h-6" />
+            {/* Direct Email Card */}
+            <div className="group relative rounded-3xl glass-card p-5 sm:p-6 border border-white/10 glass-card-hover overflow-hidden">
+              <div className="flex items-center justify-between mb-3">
+                <div className="p-2.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
+                  <Mail className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                  Fast Response (&lt; 24 hrs)
+                  Direct Response
                 </span>
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-1">Direct Email</h3>
-              <p className="text-zinc-400 text-xs mb-4">Click to copy address or send direct email</p>
+              <h3 className="text-white font-bold text-base mb-0.5">Email Address</h3>
+              <p className="text-zinc-400 text-xs mb-3">Click to copy or compose message</p>
 
-              <div className="flex items-center justify-between gap-2 p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:border-indigo-500/40 transition-colors">
-                <span className="text-zinc-200 font-mono text-sm font-semibold truncate">{email}</span>
+              <div className="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-indigo-500/40 transition-colors">
+                <a href={`mailto:${email}`} className="text-zinc-200 hover:text-white font-mono text-xs sm:text-sm font-semibold truncate">
+                  {email}
+                </a>
                 <button
                   type="button"
                   onClick={handleCopyEmail}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-600/20 transition-all shrink-0 active:scale-95"
                 >
-                  {copied ? (
+                  {copiedEmail ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-300" />
                       <span>Copied!</span>
@@ -126,7 +137,45 @@ export default function ContactSection() {
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5" />
-                      <span>Copy Email</span>
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Direct Phone Card */}
+            <div className="group relative rounded-3xl glass-card p-5 sm:p-6 border border-white/10 glass-card-hover overflow-hidden">
+              <div className="flex items-center justify-between mb-3">
+                <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                  Phone / WhatsApp
+                </span>
+              </div>
+
+              <h3 className="text-white font-bold text-base mb-0.5">Direct Phone</h3>
+              <p className="text-zinc-400 text-xs mb-3">Call or message via WhatsApp</p>
+
+              <div className="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-emerald-500/40 transition-colors">
+                <a href="tel:+919526256761" className="text-zinc-200 hover:text-white font-mono text-xs sm:text-sm font-semibold truncate">
+                  {phone}
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyPhone}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 transition-all shrink-0 active:scale-95"
+                >
+                  {copiedPhone ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-300" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
                     </>
                   )}
                 </button>
@@ -134,22 +183,22 @@ export default function ContactSection() {
             </div>
 
             {/* Location Card */}
-            <div className="rounded-3xl glass-card p-6 border border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-                  <MapPin className="w-6 h-6" />
+            <div className="rounded-3xl glass-card p-5 sm:p-6 border border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-3.5">
+                <div className="p-2.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                  <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-base">Location</h3>
-                  <p className="text-zinc-300 text-sm font-semibold">Kochi, Kerala, India</p>
-                  <span className="text-zinc-500 text-xs">IST (UTC +05:30)</span>
+                  <h3 className="text-white font-bold text-sm sm:text-base">Location</h3>
+                  <p className="text-zinc-300 text-xs sm:text-sm font-semibold">Kochi, Kerala, India</p>
+                  <span className="text-zinc-500 text-[11px]">IST (UTC +05:30)</span>
                 </div>
               </div>
               <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400/50" />
             </div>
 
             {/* Social Connect Matrix */}
-            <div className="rounded-3xl glass-card p-6 border border-white/10 space-y-4">
+            <div className="rounded-3xl glass-card p-5 sm:p-6 border border-white/10 space-y-3">
               <h3 className="text-zinc-400 text-xs font-bold uppercase tracking-wider">Social Channels</h3>
               <div className="grid grid-cols-2 gap-3">
                 <a
@@ -166,7 +215,7 @@ export default function ContactSection() {
                 </a>
 
                 <a
-                  href="https://linkedin.com/in/mehthab-n-m-637611344"
+                  href="https://linkedin.com/in/mehthab-n-m"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/40 hover:bg-white/10 transition-all group"
