@@ -215,7 +215,7 @@ export default function ContactSection() {
                 </a>
 
                 <a
-                  href="https://linkedin.com/in/mehthab-n-m"
+                  href="https://www.linkedin.com/in/mehthab-n-m-637611344"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/40 hover:bg-white/10 transition-all group"
