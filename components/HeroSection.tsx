@@ -152,16 +152,17 @@ export default function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Bio Subtitle mirroring CV summary */}
+            {/* Bio Subtitle fitting all roles: Full-Stack, Python, Software Engineer, Data Analyst & AI */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed font-normal"
             >
-              Full-Stack Developer with hands-on experience shipping web applications end-to-end using{" "}
-              <span className="text-white font-semibold">Python, React</span>, and{" "}
-              <span className="text-white font-semibold">SQL/NoSQL</span> databases. Skilled in designing clean APIs, optimizing data models, and leading engineering teams from design through deployment, with a growing specialization in applied AI and data-driven systems.
+              Versatile Software Engineer with hands-on experience building scalable{" "}
+              <span className="text-white font-semibold">Full-Stack applications</span>, robust{" "}
+              <span className="text-white font-semibold">Python backends</span>, and{" "}
+              <span className="text-white font-semibold">Data & AI systems</span>. Skilled in designing clean APIs, optimizing database architectures, deriving actionable insights from complex datasets, and leading engineering teams from design through production deployment.
             </motion.p>
 
             {/* Action Buttons & Socials */}

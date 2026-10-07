@@ -13,30 +13,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mehthab N M | Full-Stack Developer",
+  title: "Mehthab N M | Software Engineer • Full-Stack & Python Developer",
   description:
-    "Full-Stack Developer with hands-on experience shipping web applications end-to-end using Python, React, Next.js, and SQL/NoSQL databases. Proven record leading engineering teams, building cloud/PaaS solutions, and specializing in applied AI and data-driven systems.",
+    "Versatile Software Engineer and Full-Stack Developer with hands-on experience building scalable web applications, robust Python backends, and data & AI systems using Python, React, Next.js, and SQL/NoSQL databases.",
   keywords: [
     "Mehthab N M",
+    "Software Engineer",
     "Full-Stack Developer",
     "Python Developer",
+    "Data Analyst",
+    "AI & ML Engineer",
     "React.js",
     "Next.js",
     "Django",
+    "FastAPI",
     "Flask",
-    "Node.js",
+    "PostgreSQL",
+    "Scikit-Learn",
     "ZynkaraShift",
+    "CampyTeq",
+    "QuickTask",
     "Docker",
-    "Data Science",
-    "Machine Learning",
     "Kochi Kerala India",
-    "Software Engineer",
   ],
   authors: [{ name: "Mehthab N M" }],
   openGraph: {
-    title: "Mehthab N M | Full-Stack Developer",
+    title: "Mehthab N M | Software Engineer • Full-Stack & Python Developer",
     description:
-      "Full-Stack Developer with hands-on experience shipping web applications end-to-end using Python, React, and SQL/NoSQL databases with specialization in applied AI and data-driven systems.",
+      "Versatile Software Engineer with hands-on experience building scalable Full-Stack applications, robust Python backends, and Data & AI systems.",
     url: "https://mehthab.dev",
     siteName: "Mehthab N M Portfolio",
     locale: "en_US",
