@@ -387,12 +387,11 @@ export default function ProjectsSection() {
           })}
         </motion.div>
 
-        {/* Responsive Bento Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Uniform Grid - All Cards Same View */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           <AnimatePresence>
             {filteredProjects.map((project, idx) => {
               const IconComp = getProjectIcon(project.category);
-              const isLarge = project.isFlagship;
 
               return (
                 <motion.div
@@ -404,30 +403,26 @@ export default function ProjectsSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   whileHover={{ y: -6 }}
-                  className={`group relative rounded-3xl glass-card p-6 border border-white/10 glass-card-hover flex flex-col justify-between cursor-pointer overflow-hidden ${
-                    isLarge
-                      ? "lg:col-span-2 bg-gradient-to-br from-indigo-950/40 via-zinc-900/60 to-zinc-950/80 border-indigo-500/30"
-                      : ""
-                  }`}
+                  className="group relative rounded-3xl glass-card p-6 border border-white/10 glass-card-hover flex flex-col justify-between cursor-pointer overflow-hidden h-full"
                   onClick={() => setActiveModalProject(project)}
                 >
                   {/* Subtle Card Glow Header */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all pointer-events-none" />
 
-                  <div>
+                  <div className="flex flex-col">
                     {/* Top Meta Bar */}
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <div className="flex items-center gap-2">
-                        <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-indigo-400 group-hover:text-cyan-400 group-hover:border-indigo-500/40 transition-colors">
-                          <IconComp className="w-5 h-5" />
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="p-2 rounded-xl bg-white/5 border border-white/10 text-indigo-400 group-hover:text-cyan-400 group-hover:border-indigo-500/40 transition-colors shrink-0">
+                          <IconComp className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+                        <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider truncate">
                           {project.category}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                        {project.status === "ongoing" && (
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {project.status === "ongoing" ? (
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
                             <span className="relative flex h-1.5 w-1.5">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
@@ -435,8 +430,7 @@ export default function ProjectsSection() {
                             </span>
                             Ongoing
                           </span>
-                        )}
-                        {project.liveUrl && (
+                        ) : project.liveUrl ? (
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
                             <span className="relative flex h-1.5 w-1.5">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -444,31 +438,32 @@ export default function ProjectsSection() {
                             </span>
                             Live
                           </span>
-                        )}
-                        {project.badge && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-[10px] font-extrabold uppercase tracking-wider">
-                            {project.badge}
+                        ) : (
+                          <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold uppercase tracking-wider">
+                            Completed
                           </span>
                         )}
                       </div>
                     </div>
 
                     {/* Project Title */}
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-indigo-300 transition-colors flex items-center gap-2">
-                      <span>{project.title}</span>
-                      <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-cyan-400" />
-                    </h3>
+                    <div className="flex items-start justify-between gap-2 mb-2 min-h-[3.25rem]">
+                      <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
+                        {project.title}
+                      </h3>
+                      <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-cyan-400 shrink-0 mt-0.5" />
+                    </div>
 
                     {/* Short Description */}
-                    <p className="text-zinc-300 text-sm leading-relaxed mb-6">
+                    <p className="text-zinc-300 text-sm leading-relaxed mb-5 line-clamp-3 min-h-[4rem]">
                       {project.description}
                     </p>
                   </div>
 
-                  <div>
+                  <div className="flex flex-col mt-auto">
                     {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.tech.map((t) => (
+                    <div className="flex flex-wrap gap-1.5 mb-5 min-h-[3rem] content-start">
+                      {project.tech.slice(0, 4).map((t) => (
                         <span
                           key={t}
                           className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-medium text-zinc-300 group-hover:border-white/20 transition-colors"
@@ -476,13 +471,18 @@ export default function ProjectsSection() {
                           {t}
                         </span>
                       ))}
+                      {project.tech.length > 4 && (
+                        <span className="px-2 py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-semibold text-zinc-400">
+                          +{project.tech.length - 4}
+                        </span>
+                      )}
                     </div>
 
                     {/* Card Footer Actions */}
-                    <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-400 font-medium">
+                    <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-2 text-xs text-zinc-400 font-medium">
                       <span className="flex items-center gap-1.5 text-indigo-400 group-hover:text-cyan-300 transition-colors font-semibold">
                         <Eye className="w-3.5 h-3.5" />
-                        <span>View Architecture</span>
+                        <span>View Details</span>
                       </span>
 
                       <div className="flex items-center gap-2">
@@ -492,13 +492,9 @@ export default function ProjectsSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600/80 to-cyan-600/80 hover:from-indigo-500 hover:to-cyan-500 text-white font-semibold shadow-md shadow-indigo-600/20 hover:scale-105 active:scale-95 transition-all"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600/80 to-cyan-600/80 hover:from-indigo-500 hover:to-cyan-500 text-white font-semibold shadow-md shadow-indigo-600/20 hover:scale-105 active:scale-95 transition-all text-xs"
                             title="Open Live Deployment"
                           >
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                            </span>
                             <span>Live Demo</span>
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
