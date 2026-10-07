@@ -37,6 +37,7 @@ const skillsData: SkillItem[] = [
 
   // Web & Frameworks (from CV: Django, Flask, React.js, Next.js, Node.js, REST APIs, HTML5, CSS3, Bootstrap)
   { name: "Django", category: "web", level: "Advanced", highlight: true },
+  { name: "FastAPI", category: "web", level: "Advanced", highlight: true },
   { name: "Flask", category: "web", level: "Proficient", highlight: true },
   { name: "React.js", category: "web", level: "Advanced", highlight: true },
   { name: "Next.js", category: "web", level: "Advanced", highlight: true },
@@ -47,12 +48,14 @@ const skillsData: SkillItem[] = [
   { name: "Bootstrap", category: "web", level: "Advanced" },
 
   // Databases (from CV: MySQL, PostgreSQL, MongoDB, SQL Database Design & Optimization)
-  { name: "MySQL", category: "database", level: "Advanced", highlight: true },
   { name: "PostgreSQL", category: "database", level: "Advanced", highlight: true },
+  { name: "MySQL", category: "database", level: "Advanced", highlight: true },
   { name: "MongoDB", category: "database", level: "Advanced", highlight: true },
+  { name: "Redis", category: "database", level: "Proficient", highlight: true },
   { name: "SQL Database Design & Optimization", category: "database", level: "Advanced", highlight: true },
 
   // Data & AI (from CV: Pandas, NumPy, Tableau, Generative AI Integration, Prompt Engineering, Agentic AI Workflows)
+  { name: "Scikit-Learn", category: "ai", level: "Advanced", highlight: true },
   { name: "Pandas", category: "ai", level: "Advanced", highlight: true },
   { name: "NumPy", category: "ai", level: "Advanced", highlight: true },
   { name: "Tableau", category: "ai", level: "Proficient" },

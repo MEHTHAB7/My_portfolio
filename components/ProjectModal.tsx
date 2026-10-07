@@ -18,6 +18,7 @@ export interface ProjectItem {
   githubUrl?: string;
   liveUrl?: string;
   isFlagship?: boolean;
+  status?: "completed" | "ongoing";
 }
 
 interface ProjectModalProps {
@@ -59,11 +60,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <X className="w-5 h-5" />
           </button>
 
-          {/* Category Pill & Badge */}
+          {/* Category Pill & Badges */}
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span className="px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
               {project.category}
             </span>
+            {project.status === "completed" && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                Completed
+              </span>
+            )}
+            {project.status === "ongoing" && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
+                </span>
+                Ongoing Development
+              </span>
+            )}
             {project.roleOrTeam && (
               <span className="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
                 👥 {project.roleOrTeam}
@@ -141,7 +157,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <a
                 href={project.githubUrl || "https://github.com/MEHTHAB7"}
                 target="_blank"
@@ -156,9 +172,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-lg shadow-indigo-600/20"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-lg shadow-indigo-600/25 hover:scale-105 active:scale-95"
                 >
-                  <span>Live Platform</span>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span>Open Live Platform</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
               )}
