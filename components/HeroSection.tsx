@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import profilePic from "@/public/profile.jpeg";
@@ -18,7 +19,43 @@ import {
 } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 
+const rotatingRoles = [
+  "Full-Stack Developer",
+  "Python Developer",
+  "Software Developer",
+  "Data Analyst",
+  "AI & ML Engineer",
+];
+
 export default function HeroSection() {
+  const [currentRoleText, setCurrentRoleText] = useState("Full-Stack Developer");
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const fullText = rotatingRoles[roleIndex];
+    const typingSpeed = isDeleting ? 35 : 75;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (currentRoleText.length < fullText.length) {
+          setCurrentRoleText(fullText.slice(0, currentRoleText.length + 1));
+        } else {
+          // Pause at end of completed title before backspacing
+          setTimeout(() => setIsDeleting(true), 1800);
+        }
+      } else {
+        if (currentRoleText.length > 0) {
+          setCurrentRoleText(fullText.slice(0, currentRoleText.length - 1));
+        } else {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % rotatingRoles.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [currentRoleText, isDeleting, roleIndex]);
   const metrics = [
     {
       value: "Best Performer",
@@ -107,9 +144,12 @@ export default function HeroSection() {
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
                 Mehthab <span className="text-gradient-indigo">N M</span>
               </h1>
-              <p className="text-2xl sm:text-3xl font-semibold text-gradient-cyan pt-1">
-                Full-Stack Developer
-              </p>
+              <div className="h-10 sm:h-12 flex items-center justify-center lg:justify-start pt-1">
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+                  {currentRoleText}
+                </span>
+                <span className="inline-block w-[3px] h-7 sm:h-8 ml-1 bg-cyan-400 animate-pulse rounded-full" />
+              </div>
             </motion.div>
 
             {/* Bio Subtitle mirroring CV summary */}
@@ -218,10 +258,9 @@ export default function HeroSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
 
-                  {/* Top Floating Badge */}
                   <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-zinc-950/80 backdrop-blur-md border border-white/10 flex items-center gap-1.5 text-xs text-zinc-200 font-medium">
                     <Terminal className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Full-Stack Developer</span>
+                    <span>{rotatingRoles[roleIndex]}</span>
                   </div>
 
                   {/* Bottom Floating Skill Pills */}
