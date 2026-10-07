@@ -207,9 +207,9 @@ const projectsData: ProjectItem[] = [
     id: "zynkaraauth",
     title: "ZynkaraAuth – Centralized Identity Engine",
     category: "Authentication Platform",
-    badge: "SECURITY ENGINE",
-    status: "completed",
-    period: "2025",
+    badge: "SECURITY ENGINE • ONGOING",
+    status: "ongoing",
+    period: "Ongoing • In Active Development",
     roleOrTeam: "Backend Engineer",
     description:
       "Centralized identity and authentication engine managing secure user sessions, OAuth integrations, and JWT verification.",
