@@ -16,8 +16,10 @@ import {
   Download,
   Sparkles,
   ShieldCheck,
+  FileText,
 } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
+import { LinkedinIcon, GithubIcon, FiverrIcon } from "@/components/SocialIcons";
+import { CONTACT_INFO, getBasePath } from "@/config/portfolio";
 
 const rotatingRoles = [
   "Full-Stack Developer",
@@ -87,6 +89,8 @@ export default function HeroSection() {
     },
   ];
 
+  const resumeHref = `${getBasePath()}${CONTACT_INFO.resumePath}`;
+
   return (
     <section
       id="about"
@@ -114,7 +118,7 @@ export default function HeroSection() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span>Open for Full-Stack Opportunities</span>
+                <span>Open to full-time roles &amp; freelance projects</span>
               </div>
 
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium backdrop-blur-md">
@@ -123,11 +127,11 @@ export default function HeroSection() {
               </div>
 
               <a
-                href="tel:+919526256761"
+                href={`tel:${CONTACT_INFO.phoneRaw}`}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-indigo-500/40 text-zinc-300 hover:text-white text-xs font-medium backdrop-blur-md transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-indigo-400" />
-                <span>+91 95262 56761</span>
+                <span>{CONTACT_INFO.phone}</span>
               </a>
             </motion.div>
 
@@ -162,7 +166,7 @@ export default function HeroSection() {
               Versatile Software Engineer with hands-on experience building scalable{" "}
               <span className="text-white font-semibold">Full-Stack applications</span>, robust{" "}
               <span className="text-white font-semibold">Python backends</span>, and{" "}
-              <span className="text-white font-semibold">Data & AI systems</span>. Skilled in designing clean APIs, optimizing database architectures, deriving actionable insights from complex datasets, and leading engineering teams from design through production deployment.
+              <span className="text-white font-semibold">Data & AI systems</span>. Skilled in designing clean APIs, optimizing database architectures, deriving actionable insights from complex datasets, and leading engineering teams from design through production deployment. I also partner with clients to build and deploy high-performance custom web applications.
             </motion.p>
 
             {/* Action Buttons & Socials */}
@@ -170,30 +174,37 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2"
             >
+              {/* Primary: Hire Me */}
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-indigo-600/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+              >
+                <Sparkles className="w-4 h-4 text-cyan-200" />
+                <span>Hire Me</span>
+              </a>
+
+              {/* Secondary: View Projects */}
               <a
                 href="#projects"
-                className="group relative inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-indigo-600/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 border border-white/15 hover:bg-white/10 hover:border-indigo-500/50 text-white font-semibold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>View Projects</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
+              {/* Download Resume */}
               <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 border border-white/15 hover:bg-white/10 hover:border-indigo-500/50 text-white font-semibold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                href={resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Mehthab_N_M_Resume.pdf"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/10 text-zinc-300 hover:text-white text-sm font-medium transition-all"
+                title="Download Resume (PDF)"
               >
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-                <span>Get in Touch</span>
-              </a>
-
-              <a
-                href="#experience"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 text-sm font-medium transition-all"
-              >
-                <Download className="w-4 h-4 text-indigo-400" />
-                <span className="hidden sm:inline">Experience</span>
+                <Download className="w-4 h-4 text-cyan-400" />
+                <span>Download Resume</span>
               </a>
             </motion.div>
 
@@ -202,11 +213,11 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex items-center justify-center lg:justify-start gap-4 pt-4 text-zinc-400"
+              className="flex items-center justify-center lg:justify-start gap-3 pt-4 text-zinc-400 flex-wrap"
             >
               <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Connect:</span>
               <a
-                href="https://github.com/MEHTHAB7"
+                href={CONTACT_INFO.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all duration-200"
@@ -215,7 +226,7 @@ export default function HeroSection() {
                 <GithubIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://www.linkedin.com/in/mehthab-n-m-637611344"
+                href={CONTACT_INFO.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-200"
@@ -224,7 +235,17 @@ export default function HeroSection() {
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a
-                href="mailto:mehthabnm7@gmail.com"
+                href={CONTACT_INFO.fiverrUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-200"
+                aria-label="Fiverr Freelance Profile"
+                title="Fiverr Freelance Profile"
+              >
+                <FiverrIcon className="w-4 h-4" />
+              </a>
+              <a
+                href={`mailto:${CONTACT_INFO.email}`}
                 className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-200"
                 aria-label="Send Email"
               >

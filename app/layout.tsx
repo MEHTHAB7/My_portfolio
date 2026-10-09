@@ -13,44 +13,54 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mehthab7.github.io/My_portfolio/"),
   title: "Mehthab N M | Software Engineer • Full-Stack & Python Developer",
   description:
-    "Versatile Software Engineer and Full-Stack Developer with hands-on experience building scalable web applications, robust Python backends, and data & AI systems using Python, React, Next.js, and SQL/NoSQL databases.",
+    "Versatile Software Engineer and Full-Stack Developer with hands-on experience building scalable web applications, robust Python backends, freelance client solutions, and data & AI systems.",
   keywords: [
     "Mehthab N M",
     "Software Engineer",
     "Full-Stack Developer",
     "Python Developer",
+    "Freelance Web Developer",
     "Data Analyst",
     "AI & ML Engineer",
     "React.js",
     "Next.js",
     "Django",
     "FastAPI",
-    "Flask",
     "PostgreSQL",
-    "Scikit-Learn",
-    "ZynkaraShift",
-    "CampyTeq",
-    "QuickTask",
+    "REST APIs",
     "Docker",
     "Kochi Kerala India",
   ],
   authors: [{ name: "Mehthab N M" }],
+  alternates: {
+    canonical: "https://mehthab7.github.io/My_portfolio/",
+  },
   openGraph: {
     title: "Mehthab N M | Software Engineer • Full-Stack & Python Developer",
     description:
-      "Versatile Software Engineer with hands-on experience building scalable Full-Stack applications, robust Python backends, and Data & AI systems.",
-    url: "https://mehthab.dev",
+      "Full-stack web applications, robust Python backends, freelance client solutions, and applied AI systems.",
+    url: "https://mehthab7.github.io/My_portfolio/",
     siteName: "Mehthab N M Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://mehthab7.github.io/My_portfolio/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Mehthab N M | Software Engineer & Freelance Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mehthab N M | Full-Stack Developer",
+    title: "Mehthab N M | Software Engineer • Full-Stack & Python Developer",
     description:
-      "Full-Stack Developer shipping web applications end-to-end using Python, React, and SQL/NoSQL databases.",
+      "Full-stack web applications, robust Python backends, freelance client solutions, and applied AI systems.",
+    images: ["https://mehthab7.github.io/My_portfolio/og-image.png"],
   },
 };
 

@@ -2,25 +2,32 @@
 
 import { useState, useEffect } from "react";
 import { ArrowUp, Code2, Mail, Heart, Clock } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
+import { LinkedinIcon, GithubIcon, FiverrIcon } from "@/components/SocialIcons";
+import { CONTACT_INFO } from "@/config/portfolio";
 
 export default function Footer() {
   const [istTime, setIstTime] = useState("");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const updateTime = () => {
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      };
-      const formatter = new Intl.DateTimeFormat([], options);
-      setIstTime(formatter.format(new Date()));
+      try {
+        const formatter = new Intl.DateTimeFormat("en-IN", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        });
+        setIstTime(formatter.format(new Date()));
+      } catch {
+        // Fallback standard time formatting
+        setIstTime(new Date().toLocaleTimeString());
+      }
     };
 
     updateTime();
+    setMounted(true);
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -33,7 +40,6 @@ export default function Footer() {
     <footer className="relative bg-zinc-950 border-t border-white/10 py-12 text-zinc-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/5">
-          
           {/* Logo & Info */}
           <div className="flex items-center gap-3 text-white">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 p-[1px]">
@@ -43,21 +49,29 @@ export default function Footer() {
             </div>
             <div>
               <span className="font-extrabold tracking-wider text-base">MEHTHAB N M</span>
-              <p className="text-zinc-500 text-xs">Full-Stack Developer • Python, React & Applied AI</p>
+              <p className="text-zinc-500 text-xs">
+                Software Engineer • Full-Stack Developer &amp; Freelance Solutions
+              </p>
             </div>
           </div>
 
-          {/* Dynamic IST Clock Widget */}
+          {/* Dynamic IST Clock Widget (Fixed: Never shows "Loading...") */}
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
             <Clock className="w-3.5 h-3.5 text-cyan-400" />
             <span>Kochi, IN (IST):</span>
-            <span className="text-white font-bold">{istTime || "Loading..."}</span>
+            <span className="text-white font-bold tracking-wider">
+              {mounted && istTime ? istTime : "10:00:00 PM"}
+            </span>
           </div>
 
           {/* Socials & Top Scroll Button */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <a
-              href="https://github.com/MEHTHAB7"
+              href={CONTACT_INFO.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-colors"
@@ -66,7 +80,7 @@ export default function Footer() {
               <GithubIcon className="w-4 h-4" />
             </a>
             <a
-              href="https://www.linkedin.com/in/mehthab-n-m-637611344"
+              href={CONTACT_INFO.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-colors"
@@ -75,7 +89,17 @@ export default function Footer() {
               <LinkedinIcon className="w-4 h-4" />
             </a>
             <a
-              href="mailto:mehthabnm7@gmail.com"
+              href={CONTACT_INFO.fiverrUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-300 hover:text-emerald-400 transition-colors"
+              aria-label="Fiverr Freelance Profile"
+              title="Fiverr Freelance Profile"
+            >
+              <FiverrIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={`mailto:${CONTACT_INFO.email}`}
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-colors"
               aria-label="Email"
             >
@@ -83,6 +107,7 @@ export default function Footer() {
             </a>
 
             <button
+              type="button"
               onClick={scrollToTop}
               className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95 ml-2"
               aria-label="Scroll to top"
@@ -90,7 +115,6 @@ export default function Footer() {
               <ArrowUp className="w-4 h-4" />
             </button>
           </div>
-
         </div>
 
         {/* Copyright */}
@@ -99,7 +123,7 @@ export default function Footer() {
           <p className="flex items-center gap-1">
             <span>Crafted with</span>
             <Heart className="w-3 h-3 text-indigo-400 fill-indigo-400" />
-            <span>Next.js, Tailwind CSS & Framer Motion</span>
+            <span>Next.js, Tailwind CSS &amp; Framer Motion</span>
           </p>
         </div>
       </div>

@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Code2, Mail, Sparkles } from "lucide-react";
+import { Menu, X, Code2, Mail, Sparkles, Download } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
+import { CONTACT_INFO, getBasePath } from "@/config/portfolio";
 
 const navItems = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
+  { name: "Services", href: "#services" },
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
   { name: "Education", href: "#education" },
@@ -40,6 +42,8 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const resumeHref = `${getBasePath()}${CONTACT_INFO.resumePath}`;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -64,7 +68,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-full px-3 py-1.5 shadow-inner">
+          <nav className="hidden lg:flex items-center gap-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-full px-3 py-1.5 shadow-inner">
             {navItems.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
@@ -73,7 +77,7 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   onClick={() => setActiveSection(sectionId)}
-                  className={`relative px-4 py-1.5 text-sm font-medium transition-colors duration-200 rounded-full ${
+                  className={`relative px-3.5 py-1.5 text-xs xl:text-sm font-medium transition-colors duration-200 rounded-full ${
                     isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
@@ -91,9 +95,9 @@ export default function Navbar() {
           </nav>
 
           {/* Header Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2.5">
             <a
-              href="https://github.com/MEHTHAB7"
+              href={CONTACT_INFO.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 hover:border-indigo-500/50 transition-all duration-200"
@@ -102,7 +106,7 @@ export default function Navbar() {
               <GithubIcon className="w-4 h-4" />
             </a>
             <a
-              href="https://www.linkedin.com/in/mehthab-n-m-637611344"
+              href={CONTACT_INFO.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 hover:border-cyan-500/50 transition-all duration-200"
@@ -111,8 +115,19 @@ export default function Navbar() {
               <LinkedinIcon className="w-4 h-4" />
             </a>
             <a
+              href={resumeHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Mehthab_N_M_Resume.pdf"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-500/40 rounded-full transition-all duration-200"
+              title="Download Resume (PDF)"
+            >
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="hidden xl:inline">Resume</span>
+            </a>
+            <a
               href="#contact"
-              className="flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 rounded-full shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:scale-105 active:scale-95"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 rounded-full shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:scale-105 active:scale-95"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Hire Me</span>
@@ -122,7 +137,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 transition-colors"
+            className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10 transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -138,9 +153,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-zinc-950/95 backdrop-blur-2xl border-b border-white/10 px-4 py-6"
+            className="lg:hidden bg-zinc-950/95 backdrop-blur-2xl border-b border-white/10 px-4 py-6"
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <a
                   key={item.name}
@@ -149,7 +164,7 @@ export default function Navbar() {
                     setActiveSection(item.href.substring(1));
                     setMobileMenuOpen(false);
                   }}
-                  className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                     activeSection === item.href.substring(1)
                       ? "bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
                       : "text-zinc-300 hover:bg-white/5 hover:text-white"
@@ -158,38 +173,51 @@ export default function Navbar() {
                   {item.name}
                 </a>
               ))}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
                   <a
-                    href="https://github.com/MEHTHAB7"
+                    href={CONTACT_INFO.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
                   >
-                    <GithubIcon className="w-5 h-5" />
+                    <GithubIcon className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/mehthab-n-m-637611344"
+                    href={CONTACT_INFO.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
                   >
-                    <LinkedinIcon className="w-5 h-5" />
+                    <LinkedinIcon className="w-4 h-4" />
                   </a>
                   <a
-                    href="mailto:mehthabnm7@gmail.com"
-                    className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
+                    href={`mailto:${CONTACT_INFO.email}`}
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-300 hover:text-white"
                   >
-                    <Mail className="w-5 h-5" />
+                    <Mail className="w-4 h-4" />
                   </a>
                 </div>
-                <a
-                  href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-full shadow-lg shadow-indigo-500/25"
-                >
-                  Hire Me
-                </a>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={resumeHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="Mehthab_N_M_Resume.pdf"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-zinc-200 bg-white/5 border border-white/10 rounded-full"
+                  >
+                    <Download className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Resume</span>
+                  </a>
+                  <a
+                    href="#contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-full shadow-lg shadow-indigo-500/25"
+                  >
+                    Hire Me
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>

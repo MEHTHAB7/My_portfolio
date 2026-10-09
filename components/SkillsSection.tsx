@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Code2,
   Cpu,
@@ -16,59 +16,63 @@ import {
   Layers,
   HeartHandshake,
   Globe,
-  Award,
+  ChevronDown,
+  ChevronUp,
+  BookOpen,
 } from "lucide-react";
 
 interface SkillItem {
   name: string;
   category: "languages" | "web" | "database" | "ai" | "tools";
-  level: string;
-  highlight?: boolean;
+  level: "Advanced" | "Proficient" | "Learning";
+  isCore?: boolean;
 }
 
+// Exactly 10 core skills with "Advanced" label; all other skills marked "Proficient" or "Learning"
 const skillsData: SkillItem[] = [
-  // Languages (from CV: Python, Java, C, C++, JavaScript, PHP)
-  { name: "Python", category: "languages", level: "Advanced", highlight: true },
-  { name: "JavaScript", category: "languages", level: "Advanced", highlight: true },
+  // --- 10 CORE SKILLS (Advanced) ---
+  { name: "Python", category: "languages", level: "Advanced", isCore: true },
+  { name: "Django", category: "web", level: "Advanced", isCore: true },
+  { name: "FastAPI", category: "web", level: "Advanced", isCore: true },
+  { name: "JavaScript", category: "languages", level: "Advanced", isCore: true },
+  { name: "React.js", category: "web", level: "Advanced", isCore: true },
+  { name: "Next.js", category: "web", level: "Advanced", isCore: true },
+  { name: "PostgreSQL", category: "database", level: "Advanced", isCore: true },
+  { name: "REST APIs", category: "web", level: "Advanced", isCore: true },
+  { name: "Docker", category: "tools", level: "Advanced", isCore: true },
+  { name: "Git / GitHub", category: "tools", level: "Advanced", isCore: true },
+
+  // --- ADDITIONAL SKILLS (Proficient / Learning) ---
+  // Languages
   { name: "Java", category: "languages", level: "Proficient" },
   { name: "C", category: "languages", level: "Proficient" },
   { name: "C++", category: "languages", level: "Proficient" },
   { name: "PHP", category: "languages", level: "Proficient" },
 
-  // Web & Frameworks (from CV: Django, Flask, React.js, Next.js, Node.js, REST APIs, HTML5, CSS3, Bootstrap)
-  { name: "Django", category: "web", level: "Advanced", highlight: true },
-  { name: "FastAPI", category: "web", level: "Advanced", highlight: true },
-  { name: "Flask", category: "web", level: "Proficient", highlight: true },
-  { name: "React.js", category: "web", level: "Advanced", highlight: true },
-  { name: "Next.js", category: "web", level: "Advanced", highlight: true },
-  { name: "Node.js", category: "web", level: "Advanced", highlight: true },
-  { name: "REST APIs", category: "web", level: "Advanced", highlight: true },
-  { name: "HTML5", category: "web", level: "Advanced" },
-  { name: "CSS3", category: "web", level: "Advanced" },
-  { name: "Bootstrap", category: "web", level: "Advanced" },
+  // Web & Frontend
+  { name: "Flask", category: "web", level: "Proficient" },
+  { name: "Node.js", category: "web", level: "Proficient" },
+  { name: "HTML5 & CSS3", category: "web", level: "Proficient" },
+  { name: "Bootstrap & Tailwind", category: "web", level: "Proficient" },
 
-  // Databases (from CV: MySQL, PostgreSQL, MongoDB, SQL Database Design & Optimization)
-  { name: "PostgreSQL", category: "database", level: "Advanced", highlight: true },
-  { name: "MySQL", category: "database", level: "Advanced", highlight: true },
-  { name: "MongoDB", category: "database", level: "Advanced", highlight: true },
-  { name: "Redis", category: "database", level: "Proficient", highlight: true },
-  { name: "SQL Database Design & Optimization", category: "database", level: "Advanced", highlight: true },
+  // Databases & Caching
+  { name: "MySQL", category: "database", level: "Proficient" },
+  { name: "MongoDB", category: "database", level: "Proficient" },
+  { name: "Redis", category: "database", level: "Proficient" },
+  { name: "SQL Schema Design", category: "database", level: "Proficient" },
 
-  // Data & AI (from CV: Pandas, NumPy, Tableau, Generative AI Integration, Prompt Engineering, Agentic AI Workflows)
-  { name: "Scikit-Learn", category: "ai", level: "Advanced", highlight: true },
-  { name: "Pandas", category: "ai", level: "Advanced", highlight: true },
-  { name: "NumPy", category: "ai", level: "Advanced", highlight: true },
+  // Data & Applied AI
+  { name: "Scikit-Learn", category: "ai", level: "Proficient" },
+  { name: "Pandas & NumPy", category: "ai", level: "Proficient" },
   { name: "Tableau", category: "ai", level: "Proficient" },
-  { name: "Generative AI Integration", category: "ai", level: "Advanced", highlight: true },
-  { name: "Prompt Engineering", category: "ai", level: "Advanced", highlight: true },
-  { name: "Agentic AI Workflows", category: "ai", level: "Advanced", highlight: true },
+  { name: "Generative AI Integration", category: "ai", level: "Proficient" },
+  { name: "Prompt Engineering", category: "ai", level: "Proficient" },
+  { name: "Agentic AI Workflows", category: "ai", level: "Learning" },
 
-  // Tools & Platforms (from CV: Git/GitHub, Docker, VS Code, Render, Netlify)
-  { name: "Git / GitHub", category: "tools", level: "Advanced", highlight: true },
-  { name: "Docker", category: "tools", level: "Advanced", highlight: true },
-  { name: "VS Code", category: "tools", level: "Advanced" },
+  // Tools & Cloud
+  { name: "VS Code", category: "tools", level: "Proficient" },
   { name: "Render", category: "tools", level: "Proficient" },
-  { name: "Netlify", category: "tools", level: "Proficient" },
+  { name: "Netlify & Vercel", category: "tools", level: "Proficient" },
 ];
 
 const categoryTabs = [
@@ -97,22 +101,64 @@ const spokenLanguages = [
 export default function SkillsSection() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showMoreSkills, setShowMoreSkills] = useState(false);
 
+  // Filter skills based on search query and category
   const filteredSkills = skillsData.filter((skill) => {
-    const matchesCategory = activeCategory === "all" || skill.category === activeCategory;
-    const matchesSearch = skill.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      activeCategory === "all" || skill.category === activeCategory;
+    const matchesSearch = skill.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
+  // Split into core skills and additional skills
+  const coreSkills = filteredSkills.filter((s) => s.isCore);
+  const additionalSkills = filteredSkills.filter((s) => !s.isCore);
+
+  // If user is searching or viewing a specific category, show all matching skills,
+  // otherwise respect the showMoreSkills toggle for additional skills.
+  const isFiltering = searchQuery.trim().length > 0 || activeCategory !== "all";
+  const visibleAdditionalSkills = isFiltering || showMoreSkills ? additionalSkills : [];
+
   const getCategoryLabel = (cat: string) => {
     switch (cat) {
-      case "languages": return "Language";
-      case "web": return "Web & Framework";
-      case "database": return "Database";
-      case "ai": return "Data & AI";
-      case "tools": return "Tool & Platform";
-      default: return cat;
+      case "languages":
+        return "Language";
+      case "web":
+        return "Web & Framework";
+      case "database":
+        return "Database";
+      case "ai":
+        return "Data & AI";
+      case "tools":
+        return "Tool & Platform";
+      default:
+        return cat;
     }
+  };
+
+  const getLevelBadge = (level: SkillItem["level"], isCore?: boolean) => {
+    if (isCore) {
+      return (
+        <span className="px-2 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-[10px] font-bold uppercase tracking-wider">
+          Core • Advanced
+        </span>
+      );
+    }
+    if (level === "Learning") {
+      return (
+        <span className="px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
+          Learning
+        </span>
+      );
+    }
+    return (
+      <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
+        Proficient
+      </span>
+    );
   };
 
   return (
@@ -121,7 +167,6 @@ export default function SkillsSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <motion.div
@@ -141,7 +186,7 @@ export default function SkillsSection() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight"
           >
-            Skills, Frameworks & <span className="text-gradient-cyan">AI Ecosystem</span>
+            Skills, Frameworks &amp; <span className="text-gradient-cyan">AI Ecosystem</span>
           </motion.h2>
 
           <motion.p
@@ -151,7 +196,7 @@ export default function SkillsSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            Curated directly from hands-on software engineering, production web apps, cloud containerization, and applied AI systems.
+            Focused around 10 core production pillars spanning Python, modern React, database architecture, and containerization.
           </motion.p>
         </div>
 
@@ -192,52 +237,146 @@ export default function SkillsSection() {
           </div>
         </div>
 
-        {/* Skills Grid */}
-        <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {filteredSkills.map((skill, idx) => (
-            <motion.div
-              layout
-              key={skill.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: idx * 0.02 }}
-              whileHover={{ scale: 1.04, y: -4 }}
-              className={`group relative rounded-2xl glass-card p-4 border border-white/10 hover:border-indigo-500/40 transition-all duration-200 flex flex-col justify-between ${
-                skill.highlight ? "bg-white/[0.04] border-white/15" : ""
-              }`}
-            >
-              {/* Header Icon & Tag */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-400 group-hover:text-cyan-400 group-hover:bg-indigo-500/10 transition-colors">
-                  <Code2 className="w-4 h-4" />
+        {/* Core 10 Skills Grid */}
+        <div className="space-y-6">
+          {!isFiltering && (
+            <div className="flex items-center justify-between pb-2">
+              <span className="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>10 Core Production Skills</span>
+              </span>
+              <span className="text-xs text-zinc-500 font-mono">10 of 10 visible</span>
+            </div>
+          )}
+
+          <motion.div
+            layout
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+          >
+            {coreSkills.map((skill, idx) => (
+              <motion.div
+                layout
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: idx * 0.02 }}
+                whileHover={{ scale: 1.04, y: -4 }}
+                className="group relative rounded-2xl glass-card p-4 border border-white/15 bg-white/[0.04] hover:border-indigo-500/50 transition-all duration-200 flex flex-col justify-between"
+              >
+                {/* Header Icon & Tag */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                    <Code2 className="w-4 h-4" />
+                  </div>
+                  {getLevelBadge(skill.level, skill.isCore)}
                 </div>
-                {skill.highlight && (
-                  <span className="px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 text-[10px] font-bold uppercase tracking-wider">
-                    Core
+
+                {/* Skill Title & Level */}
+                <div>
+                  <h3 className="text-white font-bold text-sm tracking-tight group-hover:text-indigo-300 transition-colors">
+                    {skill.name}
+                  </h3>
+                  <div className="flex items-center gap-1 mt-1 text-zinc-400 text-xs">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                    <span>{skill.level}</span>
+                  </div>
+                </div>
+
+                {/* Bottom Subtle Bar */}
+                <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 uppercase tracking-wider">
+                  <span>{getCategoryLabel(skill.category)}</span>
+                  <Sparkles className="w-3 h-3 text-cyan-400/50 group-hover:text-cyan-400 transition-colors" />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Collapsible / Filtered Additional Skills */}
+          <AnimatePresence>
+            {visibleAdditionalSkills.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="pt-6"
+              >
+                <div className="flex items-center justify-between pb-3 border-t border-white/10 pt-6">
+                  <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Proficient &amp; Learning Skills</span>
                   </span>
-                )}
-              </div>
-
-              {/* Skill Title & Level */}
-              <div>
-                <h3 className="text-white font-bold text-sm tracking-tight group-hover:text-indigo-300 transition-colors">
-                  {skill.name}
-                </h3>
-                <div className="flex items-center gap-1 mt-1 text-zinc-400 text-xs">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                  <span>{skill.level}</span>
+                  <span className="text-xs text-zinc-500 font-mono">
+                    {visibleAdditionalSkills.length} additional skills
+                  </span>
                 </div>
-              </div>
 
-              {/* Bottom Subtle Bar */}
-              <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 uppercase tracking-wider">
-                <span>{getCategoryLabel(skill.category)}</span>
-                <Sparkles className="w-3 h-3 text-zinc-600 group-hover:text-cyan-400 transition-colors" />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {visibleAdditionalSkills.map((skill, idx) => (
+                    <motion.div
+                      layout
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.25, delay: idx * 0.02 }}
+                      whileHover={{ scale: 1.04, y: -4 }}
+                      className="group relative rounded-2xl glass-card p-4 border border-white/10 hover:border-cyan-500/40 transition-all duration-200 flex flex-col justify-between"
+                    >
+                      {/* Header Icon & Tag */}
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-cyan-400 transition-colors">
+                          <Code2 className="w-4 h-4" />
+                        </div>
+                        {getLevelBadge(skill.level, false)}
+                      </div>
+
+                      {/* Skill Title & Level */}
+                      <div>
+                        <h3 className="text-white font-bold text-sm tracking-tight group-hover:text-cyan-300 transition-colors">
+                          {skill.name}
+                        </h3>
+                        <div className="flex items-center gap-1 mt-1 text-zinc-400 text-xs">
+                          <CheckCircle2 className="w-3 h-3 text-cyan-400" />
+                          <span>{skill.level}</span>
+                        </div>
+                      </div>
+
+                      {/* Bottom Subtle Bar */}
+                      <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 uppercase tracking-wider">
+                        <span>{getCategoryLabel(skill.category)}</span>
+                        <Sparkles className="w-3 h-3 text-zinc-600 group-hover:text-cyan-400 transition-colors" />
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* "More Skills" Toggle Button (shown when not searching and viewing 'all') */}
+          {!isFiltering && additionalSkills.length > 0 && (
+            <div className="text-center pt-6">
+              <button
+                type="button"
+                onClick={() => setShowMoreSkills(!showMoreSkills)}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-zinc-200 hover:text-white text-xs sm:text-sm font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg"
+              >
+                {showMoreSkills ? (
+                  <>
+                    <span>Show Fewer Skills</span>
+                    <ChevronUp className="w-4 h-4 text-cyan-400" />
+                  </>
+                ) : (
+                  <>
+                    <span>Show More Skills (+{additionalSkills.length})</span>
+                    <ChevronDown className="w-4 h-4 text-cyan-400" />
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+        </div>
 
         {filteredSkills.length === 0 && (
           <div className="text-center py-12 text-zinc-500 text-sm">
@@ -246,8 +385,7 @@ export default function SkillsSection() {
         )}
 
         {/* Soft Skills & Spoken Languages Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12 pt-8 border-t border-white/10">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-16 pt-8 border-t border-white/10">
           {/* Soft Skills Box */}
           <div className="rounded-3xl glass-card p-6 border border-white/10">
             <div className="flex items-center gap-2 mb-4">
@@ -255,7 +393,7 @@ export default function SkillsSection() {
                 <HeartHandshake className="w-4 h-4" />
               </span>
               <div>
-                <h3 className="text-white font-bold text-base">Soft Skills & Leadership</h3>
+                <h3 className="text-white font-bold text-base">Soft Skills &amp; Leadership</h3>
                 <p className="text-zinc-400 text-xs">Professional interpersonal and managerial strengths</p>
               </div>
             </div>
@@ -296,9 +434,7 @@ export default function SkillsSection() {
               ))}
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

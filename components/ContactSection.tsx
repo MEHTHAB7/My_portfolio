@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -12,48 +12,137 @@ import {
   MessageSquare,
   ArrowUpRight,
   Phone,
+  ExternalLink,
 } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
+import { LinkedinIcon, GithubIcon, FiverrIcon, WhatsAppIcon } from "@/components/SocialIcons";
+import { CONTACT_INFO } from "@/config/portfolio";
+
+const PROJECT_TYPE_OPTIONS = [
+  "Full-Time / Developer Role",
+  "Business/Portfolio Website",
+  "Full-Stack Web App",
+  "REST API Development",
+  "AI & Automation Integration",
+  "Data Analysis & Dashboards",
+  "Bug Fixes & Deployment",
+  "Other",
+];
 
 export default function ContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [copiedMessage, setCopiedMessage] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    projectType: "Full-Stack Web App",
+    projectType: "Full-Time / Developer Role",
     message: "",
   });
 
-  const email = "mehthabnm7@gmail.com";
-  const phone = "+91 95262 56761";
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+  }>({});
+
+  // Listen for 'select-project-type' events triggered by "Get a Quote" buttons in ServicesSection
+  useEffect(() => {
+    const handleSelectProjectType = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        setFormData((prev) => ({ ...prev, projectType: customEvent.detail }));
+      }
+    };
+
+    window.addEventListener("select-project-type", handleSelectProjectType);
+    return () => {
+      window.removeEventListener("select-project-type", handleSelectProjectType);
+    };
+  }, []);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(CONTACT_INFO.email);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
   const handleCopyPhone = () => {
-    navigator.clipboard.writeText(phone);
+    navigator.clipboard.writeText(CONTACT_INFO.phone);
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2500);
   };
 
+  const validate = () => {
+    const errors: typeof validationErrors = {};
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      errors.name = "Please enter your name (at least 2 characters).";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      errors.message = "Please enter a message with at least 10 characters.";
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const buildMailtoUrl = () => {
+    const subjectLine =
+      formData.subject.trim() ||
+      `Portfolio Inquiry: ${formData.projectType} from ${formData.name}`;
+
+    const bodyContent = `Hi Mehthab,
+
+Name: ${formData.name}
+Email: ${formData.email}
+Project / Inquiry Type: ${formData.projectType}
+
+Message:
+${formData.message}
+`;
+
+    return `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(
+      subjectLine
+    )}&body=${encodeURIComponent(bodyContent)}`;
+  };
+
+  const buildWhatsAppUrl = () => {
+    const text = `Hi Mehthab, I saw your portfolio.
+My Name: ${formData.name || "Client"}
+Project Type: ${formData.projectType}
+Message: ${formData.message || "I would like to discuss a project."}`;
+
+    return `https://wa.me/${CONTACT_INFO.phoneRaw}?text=${encodeURIComponent(text)}`;
+  };
+
+  const handleCopyFullMessage = () => {
+    const fullText = `Name: ${formData.name}\nEmail: ${formData.email}\nProject Type: ${formData.projectType}\nMessage:\n${formData.message}`;
+    navigator.clipboard.writeText(fullText);
+    setCopiedMessage(true);
+    setTimeout(() => setCopiedMessage(false), 2500);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!validate()) return;
 
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+
+    // Launch email app with drafted inquiry
     setTimeout(() => {
-      window.location.href = `mailto:${email}?subject=${encodeURIComponent(
-        formData.subject || `Portfolio Contact: ${formData.projectType}`
-      )}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nProject Type: ${formData.projectType}\n\nMessage:\n${formData.message}`
-      )}`;
-    }, 1000);
+      window.location.href = buildMailtoUrl();
+      setIsSubmitting(false);
+      setFormSubmitted(true);
+    }, 600);
   };
 
   return (
@@ -62,7 +151,6 @@ export default function ContactSection() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-indigo-600/15 via-cyan-500/10 to-transparent rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <motion.div
@@ -92,13 +180,12 @@ export default function ContactSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            Have a full-stack opportunity, software engineering project, or want to discuss applied AI? Reach out through any of the channels below.
+            Whether you are looking to hire for a full-time engineering role, need a custom web application built, or have an API/AI project — I am ready to collaborate.
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* Left Column: Direct Contact Info & Micro-Interactions */}
+          {/* Left Column: Direct Contact Info & Socials */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -121,8 +208,11 @@ export default function ContactSection() {
               <p className="text-zinc-400 text-xs mb-3">Click to copy or compose message</p>
 
               <div className="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-indigo-500/40 transition-colors">
-                <a href={`mailto:${email}`} className="text-zinc-200 hover:text-white font-mono text-xs sm:text-sm font-semibold truncate">
-                  {email}
+                <a
+                  href={`mailto:${CONTACT_INFO.email}`}
+                  className="text-zinc-200 hover:text-white font-mono text-xs sm:text-sm font-semibold truncate"
+                >
+                  {CONTACT_INFO.email}
                 </a>
                 <button
                   type="button"
@@ -144,41 +234,55 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* Direct Phone Card */}
+            {/* Direct Phone / WhatsApp Card */}
             <div className="group relative rounded-3xl glass-card p-5 sm:p-6 border border-white/10 glass-card-hover overflow-hidden">
               <div className="flex items-center justify-between mb-3">
                 <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                   <Phone className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                  Phone / WhatsApp
+                  Call / WhatsApp
                 </span>
               </div>
 
-              <h3 className="text-white font-bold text-base mb-0.5">Direct Phone</h3>
-              <p className="text-zinc-400 text-xs mb-3">Call or message via WhatsApp</p>
+              <h3 className="text-white font-bold text-base mb-0.5">Direct Phone &amp; WhatsApp</h3>
+              <p className="text-zinc-400 text-xs mb-3">Available for urgent project queries</p>
 
               <div className="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-white/5 border border-white/10 group-hover:border-emerald-500/40 transition-colors">
-                <a href="tel:+919526256761" className="text-zinc-200 hover:text-white font-mono text-xs sm:text-sm font-semibold truncate">
-                  {phone}
-                </a>
-                <button
-                  type="button"
-                  onClick={handleCopyPhone}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 transition-all shrink-0 active:scale-95"
+                <a
+                  href={`tel:${CONTACT_INFO.phoneRaw}`}
+                  className="text-zinc-200 hover:text-white font-mono text-xs sm:text-sm font-semibold truncate"
                 >
-                  {copiedPhone ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-300" />
-                      <span>Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copy</span>
-                    </>
-                  )}
-                </button>
+                  {CONTACT_INFO.phone}
+                </a>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    type="button"
+                    onClick={handleCopyPhone}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 transition-all active:scale-95"
+                  >
+                    {copiedPhone ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-300" />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                  <a
+                    href={CONTACT_INFO.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white transition-colors"
+                    title="Chat on WhatsApp"
+                  >
+                    <WhatsAppIcon className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -189,25 +293,31 @@ export default function ContactSection() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-sm sm:text-base">Location</h3>
-                  <p className="text-zinc-300 text-xs sm:text-sm font-semibold">Kochi, Kerala, India</p>
-                  <span className="text-zinc-500 text-[11px]">IST (UTC +05:30)</span>
+                  <h3 className="text-white font-bold text-sm sm:text-base">Location &amp; Availability</h3>
+                  <p className="text-zinc-300 text-xs sm:text-sm font-semibold">
+                    {CONTACT_INFO.location}
+                  </p>
+                  <span className="text-emerald-400 text-[11px] font-medium block mt-0.5">
+                    IST (UTC +05:30) • Flexible overlap with US, UK &amp; Gulf hours
+                  </span>
                 </div>
               </div>
               <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400/50" />
             </div>
 
-            {/* Social Connect Matrix */}
+            {/* Social Channels & Freelance Platforms */}
             <div className="rounded-3xl glass-card p-5 sm:p-6 border border-white/10 space-y-3">
-              <h3 className="text-zinc-400 text-xs font-bold uppercase tracking-wider">Social Channels</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <h3 className="text-zinc-400 text-xs font-bold uppercase tracking-wider">
+                Connect &amp; Hire Channels
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                 <a
-                  href="https://github.com/MEHTHAB7"
+                  href={CONTACT_INFO.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/40 hover:bg-white/10 transition-all group"
                 >
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2">
                     <GithubIcon className="w-4 h-4 text-zinc-300 group-hover:text-white" />
                     <span className="text-xs font-semibold text-zinc-200">GitHub</span>
                   </div>
@@ -215,23 +325,36 @@ export default function ContactSection() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/mehthab-n-m-637611344"
+                  href={CONTACT_INFO.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/40 hover:bg-white/10 transition-all group"
                 >
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2">
                     <LinkedinIcon className="w-4 h-4 text-zinc-300 group-hover:text-white" />
                     <span className="text-xs font-semibold text-zinc-200">LinkedIn</span>
                   </div>
                   <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-cyan-400" />
                 </a>
+
+                <a
+                  href={CONTACT_INFO.fiverrUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 hover:bg-white/10 transition-all group"
+                  title="Fiverr Freelance Services"
+                >
+                  <div className="flex items-center gap-2">
+                    <FiverrIcon className="w-4 h-4 text-emerald-400" />
+                    <span className="text-xs font-semibold text-zinc-200">Fiverr</span>
+                  </div>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-emerald-400" />
+                </a>
               </div>
             </div>
-
           </motion.div>
 
-          {/* Right Column: Glowing Interactive Contact Form */}
+          {/* Right Column: Direct Pre-formatted Inquiry Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -240,29 +363,72 @@ export default function ContactSection() {
             className="lg:col-span-7"
           >
             <div className="rounded-3xl glass-card p-6 sm:p-8 border border-white/15 relative overflow-hidden shadow-2xl">
-              
               {formSubmitted ? (
-                <div className="text-center py-12 space-y-4">
+                <div className="text-center py-10 space-y-4">
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                     <Check className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">Message Ready to Dispatch!</h3>
-                  <p className="text-zinc-300 text-sm max-w-md mx-auto">
-                    Opening your default email client to send your inquiry directly to <span className="text-indigo-300 font-semibold">{email}</span>.
+                  <h3 className="text-2xl font-bold text-white">Opening Email Client...</h3>
+                  <p className="text-zinc-300 text-sm max-w-md mx-auto leading-relaxed">
+                    Your inquiry has been formatted and opened in your email app. If your mail app didn&apos;t launch automatically, use one of the options below:
                   </p>
-                  <button
-                    onClick={() => setFormSubmitted(false)}
-                    className="px-6 py-2.5 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-semibold hover:bg-white/20 transition-colors"
-                  >
-                    Send Another Message
-                  </button>
+
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+                    <a
+                      href={buildMailtoUrl()}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-all shadow-md"
+                    >
+                      <Mail className="w-4 h-4" />
+                      <span>Open in Mail App</span>
+                    </a>
+
+                    <a
+                      href={buildWhatsAppUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-all shadow-md"
+                    >
+                      <WhatsAppIcon className="w-4 h-4" />
+                      <span>Send via WhatsApp</span>
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={handleCopyFullMessage}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-zinc-200 text-xs font-semibold transition-all"
+                    >
+                      {copiedMessage ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Message Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Copy Message Text</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/10">
+                    <button
+                      type="button"
+                      onClick={() => setFormSubmitted(false)}
+                      className="text-xs text-zinc-400 hover:text-white underline transition-colors"
+                    >
+                      Edit or Send Another Inquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                   <div className="flex items-center justify-between pb-4 border-b border-white/10">
                     <div>
-                      <h3 className="text-white font-bold text-xl">Send a Message</h3>
-                      <p className="text-zinc-400 text-xs">Fill in your details below to connect</p>
+                      <h3 className="text-white font-bold text-xl">Send an Inquiry</h3>
+                      <p className="text-zinc-400 text-xs">
+                        Looking for full-time roles or freelance client projects
+                      </p>
                     </div>
                     <MessageSquare className="w-5 h-5 text-indigo-400" />
                   </div>
@@ -278,9 +444,23 @@ export default function ContactSection() {
                         required
                         placeholder="John Doe"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (validationErrors.name) {
+                            setValidationErrors({ ...validationErrors, name: undefined });
+                          }
+                        }}
+                        className={`w-full px-4 py-3 rounded-xl bg-white/5 border text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-colors ${
+                          validationErrors.name
+                            ? "border-rose-500 focus:ring-1 focus:ring-rose-500"
+                            : "border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                        }`}
                       />
+                      {validationErrors.name && (
+                        <p className="text-rose-400 text-xs mt-1">
+                          {validationErrors.name}
+                        </p>
+                      )}
                     </div>
 
                     <div>
@@ -292,9 +472,23 @@ export default function ContactSection() {
                         required
                         placeholder="john@example.com"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (validationErrors.email) {
+                            setValidationErrors({ ...validationErrors, email: undefined });
+                          }
+                        }}
+                        className={`w-full px-4 py-3 rounded-xl bg-white/5 border text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-colors ${
+                          validationErrors.email
+                            ? "border-rose-500 focus:ring-1 focus:ring-rose-500"
+                            : "border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                        }`}
                       />
+                      {validationErrors.email && (
+                        <p className="text-rose-400 text-xs mt-1">
+                          {validationErrors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -306,14 +500,16 @@ export default function ContactSection() {
                       </label>
                       <select
                         value={formData.projectType}
-                        onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, projectType: e.target.value })
+                        }
                         className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-sm text-zinc-100 focus:outline-none focus:border-indigo-500 transition-colors"
                       >
-                        <option value="Full-Stack Web App">Full-Stack Web App</option>
-                        <option value="Cloud / PaaS Setup">Cloud / PaaS Infrastructure</option>
-                        <option value="AI / ML Pipeline">AI & Machine Learning</option>
-                        <option value="Developer Leadership Role">Full-Time / Developer Role</option>
-                        <option value="General Collaboration">General Collaboration</option>
+                        {PROJECT_TYPE_OPTIONS.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
@@ -323,10 +519,12 @@ export default function ContactSection() {
                       </label>
                       <input
                         type="text"
-                        placeholder="Project Discussion"
+                        placeholder="Project or Role Discussion"
                         value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                        onChange={(e) =>
+                          setFormData({ ...formData, subject: e.target.value })
+                        }
+                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 transition-colors"
                       />
                     </div>
                   </div>
@@ -339,29 +537,44 @@ export default function ContactSection() {
                     <textarea
                       required
                       rows={4}
-                      placeholder="Hi Mehthab, I would like to discuss..."
+                      placeholder="Hi Mehthab, I would like to discuss a project / full-time role regarding..."
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none"
+                      onChange={(e) => {
+                        setFormData({ ...formData, message: e.target.value });
+                        if (validationErrors.message) {
+                          setValidationErrors({
+                            ...validationErrors,
+                            message: undefined,
+                          });
+                        }
+                      }}
+                      className={`w-full px-4 py-3 rounded-xl bg-white/5 border text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none transition-colors resize-none ${
+                        validationErrors.message
+                          ? "border-rose-500 focus:ring-1 focus:ring-rose-500"
+                          : "border-white/10 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                      }`}
                     />
+                    {validationErrors.message && (
+                      <p className="text-rose-400 text-xs mt-1">
+                        {validationErrors.message}
+                      </p>
+                    )}
                   </div>
 
                   {/* Submit CTA */}
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-sm tracking-wider uppercase shadow-xl shadow-indigo-600/25 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 disabled:opacity-60 text-white font-bold text-sm tracking-wider uppercase shadow-xl shadow-indigo-600/25 transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send Inquiry</span>
+                    <span>{isSubmitting ? "Opening Mail..." : "Send Inquiry"}</span>
                   </button>
                 </form>
               )}
-
             </div>
           </motion.div>
-
         </div>
-
       </div>
     </section>
   );
