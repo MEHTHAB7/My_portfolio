@@ -19,11 +19,130 @@ import {
   ShieldCheck,
   LucideIcon,
 } from "lucide-react";
-import {
-  SERVICES_DATA,
-  ServiceItem,
-  SERVICES_PRICE_DISCLAIMER,
-} from "@/config/portfolio";
+/**
+ * FREELANCE SERVICES & PRICING CONFIG
+ * ====================================
+ * Edit starting prices, titles, descriptions, and deliverables below in one place.
+ */
+export interface ServiceItem {
+  id: string;
+  title: string;
+  iconName: "Globe" | "Layers" | "Cpu" | "Bot" | "BarChart3" | "Wrench" | "Video" | "FileText";
+  startingPrice: string; // Starting prices in USD ($)
+  description: string;
+  deliverables: [string, string, string];
+  projectType: string; // Maps directly to Contact Form dropdown options
+}
+
+export const SERVICES_PRICE_DISCLAIMER =
+  "Final price depends on features and timeline";
+
+export const SERVICES_DATA: ServiceItem[] = [
+  {
+    id: "business-websites",
+    title: "Business & Portfolio Websites",
+    iconName: "Globe",
+    startingPrice: "$49",
+    description: "Custom design, mobile-friendly, SEO basics and deployment.",
+    deliverables: [
+      "Custom responsive design tailored to your brand",
+      "Mobile-friendly layout with fast loading speed",
+      "SEO basics setup and deployment on Vercel/Netlify",
+    ],
+    projectType: "Business/Portfolio Website",
+  },
+  {
+    id: "fullstack-web-apps",
+    title: "Full-Stack Web Apps (Django/FastAPI + React)",
+    iconName: "Layers",
+    startingPrice: "$199",
+    description: "Auth and user roles, database design, admin dashboard.",
+    deliverables: [
+      "Secure authentication, JWT & granular user roles (RBAC)",
+      "Robust PostgreSQL/MySQL database schema design",
+      "Interactive React/Next.js UI & custom admin dashboard",
+    ],
+    projectType: "Full-Stack Web App",
+  },
+  {
+    id: "rest-api-development",
+    title: "REST API Development",
+    iconName: "Cpu",
+    startingPrice: "$69",
+    description: "API design, JWT auth, Postman docs.",
+    deliverables: [
+      "RESTful architecture engineered in FastAPI / Django / Flask",
+      "JWT authentication, rate-limiting & validation schemas",
+      "Comprehensive Postman collection & Swagger/OpenAPI docs",
+    ],
+    projectType: "REST API Development",
+  },
+  {
+    id: "ai-automation",
+    title: "AI & Automation Integration",
+    iconName: "Bot",
+    startingPrice: "$99",
+    description: "Chatbot or AI assistant, prompt design, workflow automation.",
+    deliverables: [
+      "Custom AI chatbot or intelligent assistant integration",
+      "Prompt design, context retrieval & fine-tuned system instructions",
+      "Automated business workflows & third-party API webhooks",
+    ],
+    projectType: "AI & Automation Integration",
+  },
+  {
+    id: "data-analysis-dashboards",
+    title: "Data Analysis & Dashboards",
+    iconName: "BarChart3",
+    startingPrice: "$79",
+    description: "Data cleaning with Pandas, ML models, Tableau/web dashboards.",
+    deliverables: [
+      "Data wrangling, cleaning & exploratory analysis with Pandas/NumPy",
+      "Predictive machine learning models (Scikit-Learn classification/regression)",
+      "Interactive data visualizations in Tableau or bespoke web dashboards",
+    ],
+    projectType: "Data Analysis & Dashboards",
+  },
+  {
+    id: "bug-fixes-deployment",
+    title: "Bug Fixes & Deployment",
+    iconName: "Wrench",
+    startingPrice: "$25",
+    description: "Debugging, Docker setup, Render/Netlify deployment.",
+    deliverables: [
+      "Deep root-cause debugging & error fixes in Python/JavaScript",
+      "Docker containerization (Dockerfile & docker-compose)",
+      "Production deployment configuration on Render, Netlify, or Vercel",
+    ],
+    projectType: "Bug Fixes & Deployment",
+  },
+  {
+    id: "video-editing",
+    title: "Video Editing",
+    iconName: "Video",
+    startingPrice: "$19",
+    description: "Professional cuts, color grading, sound design & social media reels.",
+    deliverables: [
+      "Dynamic cuts, pacing, smooth transitions & motion graphics",
+      "Color grading, audio balancing, sound effects & subtitles",
+      "High-resolution exports optimized for YouTube, Reels & Shorts",
+    ],
+    projectType: "Video Editing",
+  },
+  {
+    id: "resume-making",
+    title: "Resume Making",
+    iconName: "FileText",
+    startingPrice: "$12",
+    description: "ATS-optimized resumes, modern clean designs & tailored cover letters.",
+    deliverables: [
+      "ATS-friendly formatting, keyword optimization & layout",
+      "Impactful bullet points highlighting achievements & skills",
+      "Print-ready PDF with editable source file (Docs / Word)",
+    ],
+    projectType: "Resume Making",
+  },
+];
 
 const iconMap: Record<ServiceItem["iconName"], LucideIcon> = {
   Globe,
@@ -112,12 +231,12 @@ export default function ServicesSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            From custom business websites and full-stack web applications to professional video editing, ATS resumes, and cloud deployments.
+            From custom business websites and full-stack web applications to REST APIs, AI automation, video editing, and cloud deployments.
           </motion.p>
         </div>
 
-        {/* 6 Services Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch mb-20">
+        {/* 8 Services Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch mb-8">
           {SERVICES_DATA.map((service, idx) => {
             const IconComponent = iconMap[service.iconName] || Globe;
 
@@ -127,8 +246,8 @@ export default function ServicesSection() {
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="group relative rounded-3xl glass-card p-6 sm:p-7 border border-white/10 glass-card-hover flex flex-col justify-between overflow-hidden h-full"
+                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                className="group relative rounded-3xl glass-card p-5 sm:p-7 border border-white/10 glass-card-hover flex flex-col justify-between overflow-hidden h-full"
               >
                 {/* Subtle Hover Ambient Glow */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all pointer-events-none" />
@@ -151,7 +270,7 @@ export default function ServicesSection() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-xl font-bold text-white tracking-tight mb-2 group-hover:text-indigo-300 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-indigo-300 transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-zinc-300 text-sm leading-relaxed mb-6 font-normal">
@@ -192,6 +311,16 @@ export default function ServicesSection() {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Small muted line centered under the cards */}
+        <div className="text-center mb-16">
+          <a
+            href="#contact"
+            className="text-xs sm:text-sm text-zinc-400 hover:text-cyan-400 transition-colors inline-block"
+          >
+            Based in India? Contact me for rupee (₹) pricing.
+          </a>
         </div>
 
         {/* "How I Work" Strip */}

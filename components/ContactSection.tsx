@@ -21,10 +21,12 @@ const PROJECT_TYPE_OPTIONS = [
   "Full-Time / Developer Role",
   "Business/Portfolio Website",
   "Full-Stack Web App",
-  "Video Editing",
-  "Resume Making",
+  "REST API Development",
+  "AI & Automation Integration",
   "Data Analysis & Dashboards",
   "Bug Fixes & Deployment",
+  "Video Editing",
+  "Resume Making",
   "Other",
 ];
 

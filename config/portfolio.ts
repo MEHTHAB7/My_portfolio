@@ -57,101 +57,13 @@ export const CONTACT_INFO = {
 /**
  * FREELANCE SERVICES & PRICING
  * ============================
- * Easily edit starting prices, titles, descriptions, and deliverables below.
+ * Defined in one single place at the top of components/ServicesSection.tsx
  */
-export interface ServiceItem {
-  id: string;
-  title: string;
-  iconName: "Globe" | "Layers" | "Cpu" | "Bot" | "BarChart3" | "Wrench" | "Video" | "FileText";
-  startingPrice: string; // Starting prices in USD ($)
-  description: string;
-  deliverables: [string, string, string];
-  projectType: string; // Maps directly to Contact Form dropdown options
-}
-
-export const SERVICES_PRICE_DISCLAIMER =
-  "Final price depends on features and timeline";
-
-export const SERVICES_DATA: ServiceItem[] = [
-  {
-    id: "business-websites",
-    title: "Business & Portfolio Websites",
-    iconName: "Globe",
-    startingPrice: "$99",
-    description: "Custom design, mobile-friendly, SEO basics and deployment.",
-    deliverables: [
-      "Custom responsive design tailored to your brand",
-      "Mobile-friendly layout with fast loading speed",
-      "SEO basics setup and deployment on Vercel/Netlify",
-    ],
-    projectType: "Business/Portfolio Website",
-  },
-  {
-    id: "fullstack-web-apps",
-    title: "Full-Stack Web Apps (Django/FastAPI + React)",
-    iconName: "Layers",
-    startingPrice: "$399",
-    description: "Auth and user roles, database design, admin dashboard.",
-    deliverables: [
-      "Secure authentication, JWT & granular user roles (RBAC)",
-      "Robust PostgreSQL/MySQL database schema design",
-      "Interactive React/Next.js UI & custom admin dashboard",
-    ],
-    projectType: "Full-Stack Web App",
-  },
-  {
-    id: "video-editing",
-    title: "Video Editing",
-    iconName: "Video",
-    startingPrice: "$49",
-    description: "Professional cuts, color grading, sound design & social media reels.",
-    deliverables: [
-      "Dynamic cuts, pacing, smooth transitions & motion graphics",
-      "Color grading, audio balancing, sound effects & subtitles",
-      "High-resolution exports optimized for YouTube, Reels & Shorts",
-    ],
-    projectType: "Video Editing",
-  },
-  {
-    id: "resume-making",
-    title: "Resume Making",
-    iconName: "FileText",
-    startingPrice: "$39",
-    description: "ATS-optimized resumes, modern clean designs & tailored cover letters.",
-    deliverables: [
-      "ATS-friendly formatting, keyword optimization & layout",
-      "Impactful bullet points highlighting achievements & skills",
-      "Print-ready PDF with editable source file (Docs / Word)",
-    ],
-    projectType: "Resume Making",
-  },
-  {
-    id: "data-analysis-dashboards",
-    title: "Data Analysis & Dashboards",
-    iconName: "BarChart3",
-    startingPrice: "$179",
-    description: "Data cleaning with Pandas, ML models, Tableau/web dashboards.",
-    deliverables: [
-      "Data wrangling, cleaning & exploratory analysis with Pandas/NumPy",
-      "Predictive machine learning models (Scikit-Learn classification/regression)",
-      "Interactive data visualizations in Tableau or bespoke web dashboards",
-    ],
-    projectType: "Data Analysis & Dashboards",
-  },
-  {
-    id: "bug-fixes-deployment",
-    title: "Bug Fixes & Deployment",
-    iconName: "Wrench",
-    startingPrice: "$49",
-    description: "Debugging, Docker setup, Render/Netlify deployment.",
-    deliverables: [
-      "Deep root-cause debugging & error fixes in Python/JavaScript",
-      "Docker containerization (Dockerfile & docker-compose)",
-      "Production deployment configuration on Render, Netlify, or Vercel",
-    ],
-    projectType: "Bug Fixes & Deployment",
-  },
-];
+export {
+  SERVICES_DATA,
+  SERVICES_PRICE_DISCLAIMER,
+  type ServiceItem,
+} from "@/components/ServicesSection";
 
 /**
  * CLIENT TESTIMONIALS
