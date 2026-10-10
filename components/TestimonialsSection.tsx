@@ -45,12 +45,18 @@ export default function TestimonialsSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-sm sm:text-base leading-relaxed"
           >
-            Real feedback from founders, teams, and clients on delivery speed, communication, and engineering quality.
+            Direct feedback from client projects delivered with high attention to design, detail, and quality.
           </motion.p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div
+          className={`grid gap-6 mx-auto ${
+            TESTIMONIALS_DATA.length === 1
+              ? "max-w-2xl grid-cols-1"
+              : "max-w-5xl grid-cols-1 md:grid-cols-2"
+          }`}
+        >
           {TESTIMONIALS_DATA.map((testimonial, idx) => (
             <motion.div
               key={testimonial.id}

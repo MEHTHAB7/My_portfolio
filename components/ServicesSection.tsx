@@ -8,6 +8,8 @@ import {
   Bot,
   BarChart3,
   Wrench,
+  Video,
+  FileText,
   CheckCircle2,
   ArrowRight,
   Sparkles,
@@ -30,6 +32,8 @@ const iconMap: Record<ServiceItem["iconName"], LucideIcon> = {
   Bot,
   BarChart3,
   Wrench,
+  Video,
+  FileText,
 };
 
 const workSteps = [
@@ -108,7 +112,7 @@ export default function ServicesSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            From custom business websites and full-stack web applications to REST APIs, AI automation, and cloud deployments — delivered with production-grade engineering.
+            From custom business websites and full-stack web applications to professional video editing, ATS resumes, and cloud deployments.
           </motion.p>
         </div>
 

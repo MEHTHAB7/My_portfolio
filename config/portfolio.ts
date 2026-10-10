@@ -62,7 +62,7 @@ export const CONTACT_INFO = {
 export interface ServiceItem {
   id: string;
   title: string;
-  iconName: "Globe" | "Layers" | "Cpu" | "Bot" | "BarChart3" | "Wrench";
+  iconName: "Globe" | "Layers" | "Cpu" | "Bot" | "BarChart3" | "Wrench" | "Video" | "FileText";
   startingPrice: string; // Starting prices in USD ($)
   description: string;
   deliverables: [string, string, string];
@@ -100,30 +100,30 @@ export const SERVICES_DATA: ServiceItem[] = [
     projectType: "Full-Stack Web App",
   },
   {
-    id: "rest-api-development",
-    title: "REST API Development",
-    iconName: "Cpu",
-    startingPrice: "$199",
-    description: "API design, JWT auth, Postman docs.",
+    id: "video-editing",
+    title: "Video Editing",
+    iconName: "Video",
+    startingPrice: "$49",
+    description: "Professional cuts, color grading, sound design & social media reels.",
     deliverables: [
-      "RESTful architecture engineered in FastAPI / Django / Flask",
-      "JWT authentication, rate-limiting & validation schemas",
-      "Comprehensive Postman collection & Swagger/OpenAPI docs",
+      "Dynamic cuts, pacing, smooth transitions & motion graphics",
+      "Color grading, audio balancing, sound effects & subtitles",
+      "High-resolution exports optimized for YouTube, Reels & Shorts",
     ],
-    projectType: "REST API Development",
+    projectType: "Video Editing",
   },
   {
-    id: "ai-automation",
-    title: "AI & Automation Integration",
-    iconName: "Bot",
-    startingPrice: "$249",
-    description: "Chatbot or AI assistant, prompt design, workflow automation.",
+    id: "resume-making",
+    title: "Resume Making",
+    iconName: "FileText",
+    startingPrice: "$39",
+    description: "ATS-optimized resumes, modern clean designs & tailored cover letters.",
     deliverables: [
-      "Custom AI chatbot or intelligent assistant integration",
-      "Prompt design, context retrieval & fine-tuned system instructions",
-      "Automated business workflows & third-party API webhooks",
+      "ATS-friendly formatting, keyword optimization & layout",
+      "Impactful bullet points highlighting achievements & skills",
+      "Print-ready PDF with editable source file (Docs / Word)",
     ],
-    projectType: "AI & Automation Integration",
+    projectType: "Resume Making",
   },
   {
     id: "data-analysis-dashboards",
@@ -171,20 +171,11 @@ export interface TestimonialItem {
 export const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: "testimonial-1",
-    name: "Alex Morgan",
-    role: "Founder & Product Lead",
-    company: "TechLaunch Studio",
+    name: "Noorjahan N K",
+    role: "Interior Designer",
+    company: "Noorjahan Interior Design",
     quote:
-      "Mehthab delivered our full-stack web application ahead of schedule. The code quality, database design, and responsiveness were exceptional. Great communicator who takes real ownership.",
-    rating: 5,
-  },
-  {
-    id: "testimonial-2",
-    name: "Dr. Sarah Chen",
-    role: "Engineering Director",
-    company: "NextGen Innovations",
-    quote:
-      "Worked with Mehthab on an API and automated data pipeline project. His Python and FastAPI skills are top notch, and the documentation provided made handoff completely seamless.",
+      "Mehthab designed and delivered a beautiful, modern portfolio website for my interior design work. The project showcase, smooth animations, and mobile experience were executed perfectly. Highly recommended!",
     rating: 5,
   },
 ];
