@@ -22,20 +22,25 @@ import {
 /**
  * FREELANCE SERVICES & PRICING CONFIG
  * ====================================
- * Edit starting prices, titles, descriptions, and deliverables below in one place.
+ * Edit starting prices, titles, descriptions, deliverables, and card notes below in one place.
  */
+export const PRICING_NOTES = {
+  timeline: "Final price depends on features and timeline.",
+  indiaPrefix: "Based in India? ",
+  indiaLink: "Contact me for ₹ pricing.",
+} as const;
+
+export const SERVICES_PRICE_DISCLAIMER = PRICING_NOTES.timeline;
+
 export interface ServiceItem {
   id: string;
   title: string;
-  iconName: "Globe" | "Layers" | "Cpu" | "Bot" | "BarChart3" | "Wrench" | "Video" | "FileText";
+  iconName: "Globe" | "Layers" | "BarChart3" | "Wrench" | "Video" | "FileText";
   startingPrice: string; // Starting prices in USD ($)
   description: string;
   deliverables: [string, string, string];
   projectType: string; // Maps directly to Contact Form dropdown options
 }
-
-export const SERVICES_PRICE_DISCLAIMER =
-  "Final price depends on features and timeline";
 
 export const SERVICES_DATA: ServiceItem[] = [
   {
@@ -63,32 +68,6 @@ export const SERVICES_DATA: ServiceItem[] = [
       "Interactive React/Next.js UI & custom admin dashboard",
     ],
     projectType: "Full-Stack Web App",
-  },
-  {
-    id: "rest-api-development",
-    title: "REST API Development",
-    iconName: "Cpu",
-    startingPrice: "$69",
-    description: "API design, JWT auth, Postman docs.",
-    deliverables: [
-      "RESTful architecture engineered in FastAPI / Django / Flask",
-      "JWT authentication, rate-limiting & validation schemas",
-      "Comprehensive Postman collection & Swagger/OpenAPI docs",
-    ],
-    projectType: "REST API Development",
-  },
-  {
-    id: "ai-automation",
-    title: "AI & Automation Integration",
-    iconName: "Bot",
-    startingPrice: "$99",
-    description: "Chatbot or AI assistant, prompt design, workflow automation.",
-    deliverables: [
-      "Custom AI chatbot or intelligent assistant integration",
-      "Prompt design, context retrieval & fine-tuned system instructions",
-      "Automated business workflows & third-party API webhooks",
-    ],
-    projectType: "AI & Automation Integration",
   },
   {
     id: "data-analysis-dashboards",
@@ -147,8 +126,6 @@ export const SERVICES_DATA: ServiceItem[] = [
 const iconMap: Record<ServiceItem["iconName"], LucideIcon> = {
   Globe,
   Layers,
-  Cpu,
-  Bot,
   BarChart3,
   Wrench,
   Video,
@@ -231,12 +208,12 @@ export default function ServicesSection() {
             transition={{ delay: 0.2 }}
             className="text-zinc-400 text-base sm:text-lg leading-relaxed"
           >
-            From custom business websites and full-stack web applications to REST APIs, AI automation, video editing, and cloud deployments.
+            From custom business websites and full-stack web applications to video editing, data dashboards, and cloud deployments.
           </motion.p>
         </div>
 
-        {/* 8 Services Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch mb-8">
+        {/* 6 Services Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch mb-20">
           {SERVICES_DATA.map((service, idx) => {
             const IconComponent = iconMap[service.iconName] || Globe;
 
@@ -294,11 +271,24 @@ export default function ServicesSection() {
                   </div>
                 </div>
 
-                {/* Card Footer: Pricing Note & Get a Quote CTA */}
-                <div className="pt-4 border-t border-white/10 mt-auto space-y-2.5">
-                  <p className="text-[11px] text-zinc-400 text-center leading-tight">
-                    * {SERVICES_PRICE_DISCLAIMER}
-                  </p>
+                {/* Card Footer: Pricing Notes & Get a Quote CTA */}
+                <div className="pt-4 border-t border-white/10 mt-auto space-y-3">
+                  <div className="text-[11px] text-zinc-400 text-center leading-normal space-y-0.5">
+                    <p>{PRICING_NOTES.timeline}</p>
+                    <p>
+                      {PRICING_NOTES.indiaPrefix}
+                      <a
+                        href="#contact"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleGetQuote(service.projectType);
+                        }}
+                        className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors cursor-pointer"
+                      >
+                        {PRICING_NOTES.indiaLink}
+                      </a>
+                    </p>
+                  </div>
                   <button
                     type="button"
                     onClick={() => handleGetQuote(service.projectType)}
@@ -311,16 +301,6 @@ export default function ServicesSection() {
               </motion.div>
             );
           })}
-        </div>
-
-        {/* Small muted line centered under the cards */}
-        <div className="text-center mb-16">
-          <a
-            href="#contact"
-            className="text-xs sm:text-sm text-zinc-400 hover:text-cyan-400 transition-colors inline-block"
-          >
-            Based in India? Contact me for rupee (₹) pricing.
-          </a>
         </div>
 
         {/* "How I Work" Strip */}

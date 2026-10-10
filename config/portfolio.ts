@@ -62,6 +62,7 @@ export const CONTACT_INFO = {
 export {
   SERVICES_DATA,
   SERVICES_PRICE_DISCLAIMER,
+  PRICING_NOTES,
   type ServiceItem,
 } from "@/components/ServicesSection";
 
